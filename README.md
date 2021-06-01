@@ -7,12 +7,11 @@ For the demo:
 - This will create two excel sheets. The Sheet called testgen_mocks.xlsx will contain information about the functions that are declared as extern
 - Fill in the excel sheet like this:
 
-| return: RETURN_INT(int)     | position_as_bytes: WRITE_BYTES(12) | hmac_as_bytes: WRITE_BYTES(64) |                        |                       |
-|-----------------------------|------------------------------------|--------------------------------|------------------------|-----------------------|
-| return: RETURN_INT(int)     | message: WRITE_BYTES(len)          | key: WRITE_BYTES(64)           | nonce: WRITE_BYTES(64) | hmac: WRITE_BYTES(64) |
-| return: RETURN_INT(uint8_t) |                                    |                                |                        |                       |
-| return: RETURN_INT(int)     |                                    |                                |                        |                       |
-
+| int GPS_driver_obtain_current_position(uint8_t * position_as_bytes, uint8_t * hmac_as_bytes)                              | return: RETURN_INT(int)     | position_as_bytes: WRITE_BYTES(12) | hmac_as_bytes: WRITE_BYTES(64) |                        |                       |
+|---------------------------------------------------------------------------------------------------------------------------|-----------------------------|------------------------------------|--------------------------------|------------------------|-----------------------|
+| int third_party_library_calc_hmac(uint8_t * const message, int len, char * const key, char * const nonce, uint8_t * hmac) | return: RETURN_INT(int)     | message: WRITE_BYTES(len)          | key: WRITE_BYTES(64)           | nonce: WRITE_BYTES(64) | hmac: WRITE_BYTES(64) |
+| uint8_t HSM_get_random_byte()                                                                                             | return: RETURN_INT(uint8_t) |                                    |                                |                        |                       |
+| int driver_get_current_time()                                                                                             | return: RETURN_INT(int)     |                                    |                                |                        |                       |
 - Run the second script to generate the mocking library from this: 
 - ```python3 gen_tests.py mocklib gen_template/testgen_mocks.xlsx ../mocks```
 - This creates mocklib.h and mocklib.cpp in fuzzing/mocks
