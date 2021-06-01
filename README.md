@@ -1,7 +1,7 @@
 # automotive-fuzzing-example
 For the demo:
 - Initialize Project
-- Create Fuzz Test for a function
+- Create fuzz test for a function
 - To compile it the "extern" functions need to be implemented for this use the scripts in fuzzing/auto-mock-fuzz:
 - ```python3 gen_template.py /path_to_project/automotive-fuzzing-example/modules/*/src/*.c /path_to_project/automotive-fuzzing-example/modules/*/src/*.h```
 - This will create two excel sheets. The Sheet called testgen_mocks.xlsx will contain information about the functions that are declared as extern
