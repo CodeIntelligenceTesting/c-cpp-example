@@ -14,4 +14,5 @@ target_include_directories(AUTOMOTIVE-FUZZING-EXAMPLE PRIVATE
     modules/crypto_module/src
     modules/time_module/src
     modules/key_management_module/src
+    modules/GPS_module/src
 )
