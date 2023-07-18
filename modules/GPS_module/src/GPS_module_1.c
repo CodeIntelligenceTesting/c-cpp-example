@@ -6,6 +6,8 @@
 #include "crypto_module_types.h"
 #include "crypto_module_1.h"
 
+#include "key_management_module_1.h"
+
 GPS_position current_destination;
 
 
@@ -38,12 +40,12 @@ enum GPS_return_status get_current_position(GPS_position * position) {
     if (GPS_driver_obtain_current_position(position_as_bytes, hmac_as_bytes) == 0) {
         if (crypto_verify_hmac(position_as_bytes, 16, hmac_as_bytes) == valid_hmac) {
             GPS_position pos = {
-                position_as_bytes[0] << 1 + position_as_bytes[1],
-                position_as_bytes[2] << 1 + position_as_bytes[3],
-                position_as_bytes[4] << 1 + position_as_bytes[5],
-                position_as_bytes[6] << 1 + position_as_bytes[7],
-                position_as_bytes[8] << 1 + position_as_bytes[9],
-                position_as_bytes[10] << 1 + position_as_bytes[11]
+                (uint8_t)(position_as_bytes[0] << 1) + position_as_bytes[1],
+                (uint8_t)(position_as_bytes[2] << 1) + position_as_bytes[3],
+                (uint8_t)(position_as_bytes[4] << 1) + position_as_bytes[5],
+                (uint8_t)(position_as_bytes[6] << 1) + position_as_bytes[7],
+                (uint8_t)(position_as_bytes[8] << 1) + position_as_bytes[9],
+                (uint8_t)(position_as_bytes[10] << 1) + position_as_bytes[11]
             };
             *position = pos;
             return GPS_success;

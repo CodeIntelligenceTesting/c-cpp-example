@@ -3,11 +3,14 @@
 
 #include "time_module_1.h"
 
+#include <limits.h>
+
 
 enum crypto_return_status crypto_verify_nonce(crypto_nonce * nonce) {
     for (int i = 0; i < NONCE_LENGTH; i++ ) {
         if (nonce->nonce[i] != 0) {
-            if (nonce->time_of_creation > time_current_time() - 300) {
+            int ct = current_time();
+            if (ct > INT_MIN + 300 && nonce->time_of_creation > ct - 300) {
                 return valid_nonce_provided;
             }
         }

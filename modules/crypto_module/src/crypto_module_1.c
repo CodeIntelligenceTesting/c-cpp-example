@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 
 #include "crypto_module_1.h"
 #include "crypto_module_2.h"
@@ -37,6 +38,9 @@ enum crypto_return_status crypto_set_key(crypto_key key) {
 
 enum crypto_return_status crypto_set_nonce(crypto_nonce nonce) {
     if(crypto_verify_nonce(&nonce) == valid_nonce_provided) {
+        if (current_nonce == 0) {
+            crypto_init();
+        }
         for (int i = 0; i < NONCE_LENGTH; i++) {
             current_nonce->nonce[i] = nonce.nonce[i];
         }

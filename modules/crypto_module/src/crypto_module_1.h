@@ -5,7 +5,8 @@
 
 #include "crypto_module_types.h"
 
-extern uint8_t third_party_library_calc_hmac(uint8_t * const message, int len, char * const key, char * const nonce, uint8_t * hmac);
+// extern uint8_t third_party_library_calc_hmac(uint8_t * const message, int len, char * const key, char * const nonce, uint8_t * hmac);
+extern uint8_t third_party_library_calc_hmac(const uint8_t * message, int len, const char * key, const char * nonce, uint8_t * hmac);
 
 void crypto_init();
 
