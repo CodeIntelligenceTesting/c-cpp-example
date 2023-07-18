@@ -62,6 +62,7 @@ enum crypto_return_status crypto_calculate_hmac(const uint8_t * message, int len
             if (third_party_library_calc_hmac(message, len, &(current_key.key), current_nonce->nonce, hmac->hmac) == 0) {
                 //Delete nonce to make sure it is only used once
                 free(current_nonce);
+                current_nonce = NULL;
                 return hmac_successfully_calculated;
             }
         }
