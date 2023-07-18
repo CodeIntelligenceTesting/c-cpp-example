@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(AUTOMOTIVE-FUZZING-EXAMPLE)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_library(AUTOMOTIVE-FUZZING-EXAMPLE
     modules/crypto_module/src/crypto_module_1.c
     modules/crypto_module/src/crypto_module_2.c
