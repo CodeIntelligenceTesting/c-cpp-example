@@ -1,3 +1,5 @@
 build
 .vscode
 .idea
+.cifuzz*
+module_fuzzer_inputs/*

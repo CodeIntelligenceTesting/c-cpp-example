@@ -5,11 +5,7 @@
 #include <iomanip>
         
 #include <fuzzer/FuzzedDataProvider.h>
-        
-        
-        
-        
-        
+
 static FuzzedDataProvider *fdp;
 
 // This function received the fuzzer generated data from the fuzz target.
