@@ -6,7 +6,7 @@
 
 #include <cifuzz/cifuzz.h>
 #include <fuzzer/FuzzedDataProvider.h>
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,19 +20,6 @@ extern "C" {
 
 FUZZ_TEST_SETUP() {}
 
-// Tests factorial of positive numbers.
-TEST(PersonTests, PositiveTests) {
-    Person person = {
-            "Philip Betzler",
-            28,
-            "I don't like broccoli."
-    };
-
-
-    EXPECT_EQ(getPersonsName(&person), person.name);
-    EXPECT_EQ(getPersonsAge(&person), person.age);
-}
-
 FUZZ_TEST(const uint8_t *data, size_t size) {
 
     // Ensure a minimum data length
@@ -42,13 +29,15 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
     FuzzedDataProvider fdp(data, size);
 
     Person person = {
-            *fdp.ConsumeBytesAsString(200).c_str(),
-            28,
-            *fdp.ConsumeBytesAsString(200).c_str()
+            .name = {*fdp.ConsumeBytesAsString(200).c_str()},
+            .secret = {*fdp.ConsumeBytesAsString(200).c_str()},
+            .age = fdp.ConsumeIntegral<int>(),
+
     };
 
-    printPersonsName(&person);
-    printPersonsAge(&person);
+    setPersonsName(&person, fdp.ConsumeBytesAsString(200).c_str());
+    getPersonsName(&person);
+    getPersonsAge(&person);
 
 
 }

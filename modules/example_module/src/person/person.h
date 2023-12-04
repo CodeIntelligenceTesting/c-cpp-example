@@ -10,11 +10,13 @@
 
 typedef struct Person  {
     const char name[100];
-    const int age;
     const char secret[100];
+    int age;
+
 } Person;
 
-void printPersonsName(const Person* person);
-void printPersonsAge(const Person* person);
 char* getPersonsName(const Person* person);
 int getPersonsAge(const Person* person);
+
+void setPersonsName(Person* person, const char* name);
+void setPersonsAge(Person* person, int age);
