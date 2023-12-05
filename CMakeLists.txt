@@ -22,8 +22,8 @@ add_library(AUTOMOTIVE-FUZZING-TESTSUITE
         modules/example_module/src/person/person.h
         modules/example_module/src/buffer_copy/buffer_copy.c
         modules/example_module/src/buffer_copy/buffer_copy.h
-        modules/example_module/src/complex_function/bit_shifts.c
-        modules/example_module/src/complex_function/bit_shifts.h
+        modules/example_module/src/complex_function/bit_shift/bit_shifts.c
+        modules/example_module/src/complex_function/bit_shift/bit_shifts.h
 )
 
 target_include_directories(AUTOMOTIVE-FUZZING-TESTSUITE PRIVATE
@@ -76,10 +76,6 @@ target_link_libraries(
         AUTOMOTIVE-FUZZING-TESTSUITE
 )
 target_include_directories(buffer_copy_tests PRIVATE
-        modules/crypto_module/src
-        modules/time_module/src
-        modules/key_management_module/src
-        modules/GPS_module/src
         modules/example_module/src/buffer_copy
         googletest/googletest/include
 )
@@ -95,34 +91,30 @@ target_include_directories(buffer_copy_fuzzer PRIVATE
 )
 
 add_executable(
-        complex_function_tests
-        test/complex_function/bit_shift_tests.cpp
+        bit_shift_tests
+        test/complex_function/bit_shift/bit_shift_tests.cpp
 )
 target_link_libraries(
-        complex_function_tests
+        bit_shift_tests
         GTest::gtest_main
         AUTOMOTIVE-FUZZING-TESTSUITE
 )
-target_include_directories(complex_function_tests PRIVATE
-        modules/crypto_module/src
-        modules/time_module/src
-        modules/key_management_module/src
-        modules/GPS_module/src
-        modules/example_module/src/complex_function
+target_include_directories(bit_shift_tests PRIVATE
+        modules/example_module/src/complex_function/bit_shift
         googletest/googletest/include
 )
 
-add_fuzz_test(complex_function_fuzzer test/complex_function/bit_shift_fuzz_test.cpp)
+add_fuzz_test(bit_shift_fuzzer test/complex_function/bit_shift/bit_shift_fuzz_test.cpp)
 target_link_libraries(
-        complex_function_fuzzer
+        bit_shift_fuzzer
         AUTOMOTIVE-FUZZING-TESTSUITE
 )
-target_include_directories(complex_function_fuzzer PRIVATE
-        modules/example_module/src/complex_function
+target_include_directories(bit_shift_fuzzer PRIVATE
+        modules/example_module/src/complex_function/bit_shift
         googletest/googletest/include
 )
 
 include(GoogleTest)
 gtest_discover_tests(person_tests)
 gtest_discover_tests(buffer_copy_tests)
-gtest_discover_tests(complex_function_tests)
+gtest_discover_tests(bit_shift_tests)
