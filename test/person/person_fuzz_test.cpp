@@ -1,22 +1,13 @@
 //
 // Created by philip on 22/11/23.
 //
-#include <stdint.h>
+
 #include <stddef.h>
+#include "person.h"
 
 #include <cifuzz/cifuzz.h>
 #include <fuzzer/FuzzedDataProvider.h>
-#include "gtest/gtest.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include "person.h"
-
-#ifdef __cplusplus
-}
-#endif
 
 FUZZ_TEST_SETUP() {}
 

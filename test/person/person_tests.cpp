@@ -1,20 +1,11 @@
 //
 // Created by philip on 22/11/23.
 //
-#include <stdint.h>
-#include <stddef.h>
-
-#include <gtest/gtest.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #include "person.h"
 
-#ifdef __cplusplus
-}
-#endif
+#include <gtest/gtest.h>
+
 
 // Tests factorial of positive numbers.
 TEST(PersonTests, PositiveTests) {

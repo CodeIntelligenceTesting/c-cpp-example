@@ -7,4 +7,4 @@
 
 #endif //AUTOMOTIVE_FUZZING_TESTSUITE_BIT_SHIFTS_H
 
-void someBitShiftFunction(long inputOne, int shiftingDistance);
+long someBitShiftFunction(long inputOne, int shiftingDistance);

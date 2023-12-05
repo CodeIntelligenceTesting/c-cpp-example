@@ -5,17 +5,7 @@
 
 #include <cifuzz/cifuzz.h>
 #include <fuzzer/FuzzedDataProvider.h>
-#include "gtest/gtest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include "buffer_copy.h"
-
-#ifdef __cplusplus
-}
-#endif
 
 FUZZ_TEST_SETUP() {}
 
