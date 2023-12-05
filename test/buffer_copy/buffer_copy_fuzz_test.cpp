@@ -5,7 +5,9 @@
 
 #include <cifuzz/cifuzz.h>
 #include <fuzzer/FuzzedDataProvider.h>
-#include "buffer_copy.h"
+extern "C" {
+    #include "buffer_copy.h"
+}
 
 FUZZ_TEST_SETUP() {}
 
