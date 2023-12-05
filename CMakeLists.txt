@@ -24,6 +24,10 @@ add_library(AUTOMOTIVE-FUZZING-TESTSUITE
         modules/example_module/src/buffer_copy/buffer_copy.h
         modules/example_module/src/complex_function/bit_shift/bit_shifts.c
         modules/example_module/src/complex_function/bit_shift/bit_shifts.h
+        modules/example_module/src/complex_function/base64/helpers/base64.c
+        modules/example_module/src/complex_function/base64/helpers/base64.h
+        modules/example_module/src/complex_function/base64/base64_encoder.c
+        modules/example_module/src/complex_function/base64/base64_encoder.h
 )
 
 target_include_directories(AUTOMOTIVE-FUZZING-TESTSUITE PRIVATE
@@ -114,7 +118,32 @@ target_include_directories(bit_shift_fuzzer PRIVATE
         googletest/googletest/include
 )
 
+add_executable(
+        base64_tests
+        test/complex_function/base64/base64_tests.cpp
+)
+target_link_libraries(
+        base64_tests
+        GTest::gtest_main
+        AUTOMOTIVE-FUZZING-TESTSUITE
+)
+target_include_directories(base64_tests PRIVATE
+        modules/example_module/src/complex_function/base64
+        googletest/googletest/include
+)
+
+add_fuzz_test(base64_fuzzer test/complex_function/base64/base64_fuzz_test.cpp)
+target_link_libraries(
+        base64_fuzzer
+        AUTOMOTIVE-FUZZING-TESTSUITE
+)
+target_include_directories(base64_fuzzer PRIVATE
+        modules/example_module/src/complex_function/base64
+        googletest/googletest/include
+)
+
 include(GoogleTest)
 gtest_discover_tests(person_tests)
 gtest_discover_tests(buffer_copy_tests)
 gtest_discover_tests(bit_shift_tests)
+gtest_discover_tests(base64_tests)
