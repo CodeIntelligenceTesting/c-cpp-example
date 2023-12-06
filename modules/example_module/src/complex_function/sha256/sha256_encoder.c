@@ -3,16 +3,15 @@
 //
 
 #include <string.h>
+#include <malloc.h>
 #include "sha256_encoder.h"
 #include "helpers/sha256.h"
 
-extern "C" {
-#include "sha256_encoder.h"
-}
-
 char* faulty_sha256_encode(unsigned char* buffer, size_t length) {
 
-    char* tmp = base64_encode(buffer, length);
+    cipher_params_t *params = (cipher_params_t *)malloc(sizeof(cipher_params_t));
+
+    unsigned char* tmp = file_encrypt_decrypt(params, buffer, length);
 
 
     if (prefix(tmp, "ADDADAA")) {
@@ -21,10 +20,12 @@ char* faulty_sha256_encode(unsigned char* buffer, size_t length) {
         strcpy(test, "123");
     }
 
+    cleanup(params);
+
     return tmp;
 }
 
-bool prefix(const char *pre, const char *str)
+bool prefix(const unsigned char *pre, const unsigned char *str)
 {
     return strncmp(pre, str, strlen(pre)) == 0;
 }

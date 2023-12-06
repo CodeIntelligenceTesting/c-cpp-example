@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(cifuzz NO_SYSTEM_ENVIRONMENT_PATH)
+find_package(OpenSSL)
 enable_fuzz_testing()
 add_subdirectory(googletest)
 
@@ -28,6 +29,8 @@ add_library(AUTOMOTIVE-FUZZING-TESTSUITE
         modules/example_module/src/complex_function/base64/helpers/base64.h
         modules/example_module/src/complex_function/base64/base64_encoder.c
         modules/example_module/src/complex_function/base64/base64_encoder.h
+        modules/example_module/src/complex_function/sha256/sha256_encoder.c
+        modules/example_module/src/complex_function/sha256/helpers/sha256.c
 )
 
 target_include_directories(AUTOMOTIVE-FUZZING-TESTSUITE PRIVATE
@@ -38,7 +41,7 @@ target_include_directories(AUTOMOTIVE-FUZZING-TESTSUITE PRIVATE
 )
 
 add_fuzz_test(module_fuzzer test/generated_fuzz_test.cpp test/mocks.cpp)
-target_link_libraries(module_fuzzer PRIVATE AUTOMOTIVE-FUZZING-TESTSUITE)
+target_link_libraries(module_fuzzer PRIVATE AUTOMOTIVE-FUZZING-TESTSUITE OpenSSL::Crypto)
 target_include_directories(module_fuzzer PRIVATE
         modules/crypto_module/src
         modules/time_module/src
@@ -54,6 +57,7 @@ target_link_libraries(
         person_tests
         GTest::gtest_main
         AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
 )
 target_include_directories(person_tests PRIVATE
         modules/example_module/src/person
@@ -64,6 +68,7 @@ add_fuzz_test(person_fuzzer test/person/person_fuzz_test.cpp)
 target_link_libraries(
         person_fuzzer
         AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
 )
 target_include_directories(person_fuzzer PRIVATE
         modules/example_module/src/person
@@ -78,6 +83,7 @@ target_link_libraries(
         buffer_copy_tests
         GTest::gtest_main
         AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
 )
 target_include_directories(buffer_copy_tests PRIVATE
         modules/example_module/src/buffer_copy
@@ -88,6 +94,7 @@ add_fuzz_test(buffer_copy_fuzzer test/buffer_copy/buffer_copy_fuzz_test.cpp)
 target_link_libraries(
         buffer_copy_fuzzer
         AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
 )
 target_include_directories(buffer_copy_fuzzer PRIVATE
         modules/example_module/src/buffer_copy
@@ -102,6 +109,7 @@ target_link_libraries(
         bit_shift_tests
         GTest::gtest_main
         AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
 )
 target_include_directories(bit_shift_tests PRIVATE
         modules/example_module/src/complex_function/bit_shift
@@ -112,6 +120,7 @@ add_fuzz_test(bit_shift_fuzzer test/complex_function/bit_shift/bit_shift_fuzz_te
 target_link_libraries(
         bit_shift_fuzzer
         AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
 )
 target_include_directories(bit_shift_fuzzer PRIVATE
         modules/example_module/src/complex_function/bit_shift
@@ -126,6 +135,7 @@ target_link_libraries(
         base64_tests
         GTest::gtest_main
         AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
 )
 target_include_directories(base64_tests PRIVATE
         modules/example_module/src/complex_function/base64
@@ -136,9 +146,36 @@ add_fuzz_test(base64_fuzzer test/complex_function/base64/base64_fuzz_test.cpp)
 target_link_libraries(
         base64_fuzzer
         AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
 )
 target_include_directories(base64_fuzzer PRIVATE
         modules/example_module/src/complex_function/base64
+        googletest/googletest/include
+)
+
+add_executable(
+        sha256_tests
+        test/complex_function/sha256/sha256_tests.cpp
+)
+target_link_libraries(
+        sha256_tests
+        GTest::gtest_main
+        AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
+)
+target_include_directories(sha256_tests PRIVATE
+        modules/example_module/src/complex_function/sha256
+        googletest/googletest/include
+)
+
+add_fuzz_test(sha256_fuzzer test/complex_function/sha256/sha256_fuzz_test.cpp)
+target_link_libraries(
+        sha256_fuzzer
+        AUTOMOTIVE-FUZZING-TESTSUITE
+        OpenSSL::Crypto
+)
+target_include_directories(sha256_fuzzer PRIVATE
+        modules/example_module/src/complex_function/sha256
         googletest/googletest/include
 )
 
@@ -147,3 +184,4 @@ gtest_discover_tests(person_tests)
 gtest_discover_tests(buffer_copy_tests)
 gtest_discover_tests(bit_shift_tests)
 gtest_discover_tests(base64_tests)
+gtest_discover_tests(sha256_tests)

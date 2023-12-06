@@ -10,6 +10,6 @@
 
 char *faulty_sha256_encode(unsigned char *buffer, size_t length);
 
-bool prefix(const char *pre, const char *str);
+bool prefix(const unsigned char *pre, const unsigned char *str);
 
 #endif //AUTOMOTIVE_FUZZING_TESTSUITE_BASE64_ENCODER_H
