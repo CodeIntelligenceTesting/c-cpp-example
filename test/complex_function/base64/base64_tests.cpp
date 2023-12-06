@@ -5,7 +5,9 @@
 
 #include <fuzzer/FuzzedDataProvider.h>
 #include <gtest/gtest.h>
-#include "base64_encoder.h"
+extern "C" {
+    #include "base64_encoder.h"
+}
 
 // Tests factorial of positive numbers.
 TEST(BitShiftTests, PositiveTest1) {

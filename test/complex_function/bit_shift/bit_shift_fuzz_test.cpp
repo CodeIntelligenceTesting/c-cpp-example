@@ -6,6 +6,9 @@
 #include <cifuzz/cifuzz.h>
 #include <fuzzer/FuzzedDataProvider.h>
 #include "bit_shifts.h"
+extern "C" {
+    #include "bit_shifts.h"
+}
 
 FUZZ_TEST_SETUP() {}
 

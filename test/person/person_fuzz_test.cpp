@@ -8,6 +8,10 @@
 #include <cifuzz/cifuzz.h>
 #include <fuzzer/FuzzedDataProvider.h>
 
+extern "C" {
+    #include "person.h"
+}
+
 
 FUZZ_TEST_SETUP() {}
 

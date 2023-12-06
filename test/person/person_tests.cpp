@@ -2,7 +2,9 @@
 // Created by philip on 22/11/23.
 //
 
-#include "person.h"
+extern "C" {
+    #include "person.h"
+}
 
 #include <gtest/gtest.h>
 

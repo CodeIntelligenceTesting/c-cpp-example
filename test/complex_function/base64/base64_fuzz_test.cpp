@@ -5,7 +5,10 @@
 
 #include <cifuzz/cifuzz.h>
 #include <fuzzer/FuzzedDataProvider.h>
-#include "base64_encoder.h"
+
+extern "C" {
+    #include "base64_encoder.h"
+}
 
 FUZZ_TEST_SETUP() {}
 

@@ -5,7 +5,9 @@
 
 #include <fuzzer/FuzzedDataProvider.h>
 #include <gtest/gtest.h>
-#include "bit_shifts.h"
+extern "C" {
+    #include "bit_shifts.h"
+}
 
 // Tests factorial of positive numbers.
 TEST(BitShiftTests, PositiveTest1) {

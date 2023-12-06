@@ -4,7 +4,9 @@
 
 #include <fuzzer/FuzzedDataProvider.h>
 #include <gtest/gtest.h>
-#include "buffer_copy.h"
+extern "C" {
+    #include "buffer_copy.h"
+}
 
 
 // Tests factorial of positive numbers.
