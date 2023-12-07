@@ -44,11 +44,11 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
             {
                 std::vector<uint8_t> nonce = fdp.ConsumeBytes<uint8_t>(sizeof(uint8_t) * fdp.ConsumeIntegral<uint8_t>());
                 
-                // The parameter "length" seems to represent the length of a buffer/array. In this case, we usually
-                // don't want to provide fuzzer-generated lengths that differ from the actual length of the buffer.
+                // The parameter "length" seems to represent the length of a inputBuffer/array. In this case, we usually
+                // don't want to provide fuzzer-generated lengths that differ from the actual length of the inputBuffer.
                 // If you confirm that the parameter is a length parameter, you can get the length of 
-                // the fuzzer-generated buffer as follows (replace "buffer" with the actual variable):
-                //     uint8_t length = buffer.size();
+                // the fuzzer-generated inputBuffer as follows (replace "inputBuffer" with the actual variable):
+                //     uint8_t length = inputBuffer.size();
                 uint8_t length = nonce.size();
                 
                 key_management_create_nonce(nonce.data(), length);
@@ -82,11 +82,11 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
             {
                 std::vector<uint8_t> message = fdp.ConsumeBytes<uint8_t>(sizeof(uint8_t) * fdp.ConsumeIntegral<uint8_t>());
                 
-                // The parameter "len" seems to represent the length of a buffer/array. In this case, we usually
-                // don't want to provide fuzzer-generated lengths that differ from the actual length of the buffer.
+                // The parameter "len" seems to represent the length of a inputBuffer/array. In this case, we usually
+                // don't want to provide fuzzer-generated lengths that differ from the actual length of the inputBuffer.
                 // If you confirm that the parameter is a length parameter, you can get the length of 
-                // the fuzzer-generated buffer as follows (replace "buffer" with the actual variable):
-                //     int len = buffer.size();
+                // the fuzzer-generated inputBuffer as follows (replace "inputBuffer" with the actual variable):
+                //     int len = inputBuffer.size();
                 int len = message.size();
                 crypto_hmac hmac = {0};
                 ConsumeDataAndFillRestWithZeros(hmac.hmac, 64);
@@ -115,11 +115,11 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
             {
                 std::vector<uint8_t> key = fdp.ConsumeBytes<uint8_t>(sizeof(uint8_t) * fdp.ConsumeIntegral<uint8_t>());
                 
-                // The parameter "length" seems to represent the length of a buffer/array. In this case, we usually
-                // don't want to provide fuzzer-generated lengths that differ from the actual length of the buffer.
+                // The parameter "length" seems to represent the length of a inputBuffer/array. In this case, we usually
+                // don't want to provide fuzzer-generated lengths that differ from the actual length of the inputBuffer.
                 // If you confirm that the parameter is a length parameter, you can get the length of 
-                // the fuzzer-generated buffer as follows (replace "buffer" with the actual variable):
-                //     uint8_t length = buffer.size();
+                // the fuzzer-generated inputBuffer as follows (replace "inputBuffer" with the actual variable):
+                //     uint8_t length = inputBuffer.size();
                 uint8_t length = key.size();
                 
                 key_management_create_key(key.data(), length);
@@ -178,11 +178,11 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
             {
                 std::vector<uint8_t> message = fdp.ConsumeBytes<uint8_t>(sizeof(uint8_t) * fdp.ConsumeIntegral<uint8_t>());
                 
-                // The parameter "len" seems to represent the length of a buffer/array. In this case, we usually
-                // don't want to provide fuzzer-generated lengths that differ from the actual length of the buffer.
+                // The parameter "len" seems to represent the length of a inputBuffer/array. In this case, we usually
+                // don't want to provide fuzzer-generated lengths that differ from the actual length of the inputBuffer.
                 // If you confirm that the parameter is a length parameter, you can get the length of 
-                // the fuzzer-generated buffer as follows (replace "buffer" with the actual variable):
-                //     int len = buffer.size();
+                // the fuzzer-generated inputBuffer as follows (replace "inputBuffer" with the actual variable):
+                //     int len = inputBuffer.size();
                 int len = message.size();
                 crypto_hmac hmac = {0};
                 ConsumeDataAndFillRestWithZeros(hmac.hmac, 64);

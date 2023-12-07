@@ -11,6 +11,9 @@ char* faulty_base64_encode(unsigned char* buffer, size_t length) {
 
     char* tmp = base64_encode(buffer, length);
 
+    if (tmp == NULL) {
+        return NULL;
+    }
 
     if (prefix(tmp, "ADDADAA")) {
         // Do something stupid

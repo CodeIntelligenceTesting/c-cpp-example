@@ -27,6 +27,6 @@ typedef struct _cipher_params_t{
 
 void cleanup(cipher_params_t *params);
 
-unsigned char* file_encrypt_decrypt(cipher_params_t *params, unsigned char *inputBuffer, size_t inputBufferSize);
+int file_encrypt_decrypt(cipher_params_t *params, unsigned char *inputBuffer, unsigned char** outputBuffer);
 
 #endif //AUTOMOTIVE_FUZZING_TESTSUITE_SHA256_H

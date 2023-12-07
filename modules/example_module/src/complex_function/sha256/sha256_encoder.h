@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-char *faulty_sha256_encode(unsigned char *buffer, size_t length);
+int faulty_sha256_encode(unsigned char* inputBuffer, size_t length, unsigned char** outputBuffer, unsigned char* key, unsigned char* iv);
 
 bool prefix(const unsigned char *pre, const unsigned char *str);
 

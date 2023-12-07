@@ -7,6 +7,7 @@
 
 long someBitShiftFunction(long inputOne, int shiftingDistance) {
     if (inputOne<<shiftingDistance == 84880000000 && inputOne+shiftingDistance < 81359) {
+        // Buffer overflow on purpose
         char test[1];
         strcpy(test, "123");
     }

@@ -52,7 +52,7 @@ unsigned char *base64_decode(char* b64message, size_t *decode_len)
  * @brief Use the openssl library to encode a byte array to a Base64 string.
  *
  * @param[in] The byte array to be encoded.
- * @param[in] The length of the byte array buffer.
+ * @param[in] The length of the byte array inputBuffer.
  *
  * @retval Pointer to encoded null-terminated string, or NULL if encoding failed.
  * 		   Caller has to free the memory after using the encoded string.
@@ -88,5 +88,6 @@ char *base64_encode(unsigned char *buffer, size_t length)
 
     cleanup:
     BIO_free_all(bio);
+    free(bufferPtr);
     return b64text;
 }

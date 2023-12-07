@@ -20,10 +20,17 @@ void cleanup(cipher_params_t *params){
 }
 
 
-unsigned char* file_encrypt_decrypt(cipher_params_t *params, unsigned char *inputBuffer, size_t inputBufferSize){
-    /* Allow enough space in output buffer for additional block */
+int file_encrypt_decrypt(cipher_params_t *params, unsigned char *inputBuffer, unsigned char** outputBuffer){
+    /* Allow enough space in output inputBuffer for additional block */
     int cipher_block_size = EVP_CIPHER_block_size(params->cipher_type);
-    unsigned char* out_buf = (unsigned char *) malloc(sizeof (unsigned char) * (BUFSIZE + cipher_block_size));
+
+    if (*outputBuffer != 0) {
+        free(*outputBuffer);
+    }
+
+    int outputBufferLen = sizeof (unsigned char) * (BUFSIZE + cipher_block_size);
+    *outputBuffer = (unsigned char *) malloc(outputBufferLen);
+
 
     int out_len;
     EVP_CIPHER_CTX *ctx;
@@ -53,21 +60,21 @@ unsigned char* file_encrypt_decrypt(cipher_params_t *params, unsigned char *inpu
 
     // Read in data in blocks until EOF. Update the ciphering with each read.
 
-    if(!EVP_CipherUpdate(ctx, out_buf, &out_len, inputBuffer, strlen(inputBuffer))){
+    if(!EVP_CipherUpdate(ctx, *outputBuffer, &out_len, inputBuffer, strlen(inputBuffer))){
         fprintf(stderr, "ERROR: EVP_CipherUpdate failed. OpenSSL error: %s\n", ERR_error_string(ERR_get_error(), NULL));
         EVP_CIPHER_CTX_cleanup(ctx);
         cleanup(params);
     }
-    /*
+
 
     // Now cipher the final block and write it out to file
-    if(!EVP_CipherFinal_ex(ctx, out_buf, &out_len)){
+    if(!EVP_CipherFinal_ex(ctx, *&outputBuffer[out_len], &out_len)){
         fprintf(stderr, "ERROR: EVP_CipherFinal_ex failed. OpenSSL error: %s\n", ERR_error_string(ERR_get_error(), NULL));
         EVP_CIPHER_CTX_cleanup(ctx);
         cleanup(params);
     }
-    */
+
 
     EVP_CIPHER_CTX_cleanup(ctx);
-    return out_buf;
+    return outputBufferLen;
 }

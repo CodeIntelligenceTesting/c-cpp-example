@@ -19,5 +19,6 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
     FuzzedDataProvider fdp(data, size);
     std::string testString = fdp.ConsumeRemainingBytesAsString();
 
-    faulty_base64_encode((unsigned char *) testString.c_str(), strlen(testString.c_str()));
+    char* b64encoded = faulty_base64_encode((unsigned char *) testString.c_str(), strlen(testString.c_str()));
+    free(b64encoded);
 }

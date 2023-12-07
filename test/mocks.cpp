@@ -38,9 +38,9 @@ extern "C" {
 
         
 uint8_t GPS_driver_obtain_current_position(uint8_t * position_as_bytes, uint8_t * hmac_as_bytes) {
-    unsigned int position_as_bytes_length = 12/*Provide the size of the position_as_bytes buffer*/;
+    unsigned int position_as_bytes_length = 12/*Provide the size of the position_as_bytes inputBuffer*/;
     ConsumeDataAndFillRestWithZeros(position_as_bytes, position_as_bytes_length);
-    unsigned int hmac_as_bytes_length = 64/*Provide the size of the hmac_as_bytes buffer*/;
+    unsigned int hmac_as_bytes_length = 64/*Provide the size of the hmac_as_bytes inputBuffer*/;
     ConsumeDataAndFillRestWithZeros(hmac_as_bytes, hmac_as_bytes_length);
     uint8_t cifuzz_var_0 = fdp->ConsumeIntegral<uint8_t>();
     return cifuzz_var_0;
@@ -57,7 +57,7 @@ int driver_get_current_time() {
 }
         
 uint8_t third_party_library_calc_hmac(const uint8_t * message, int len, const char * key, const char * nonce, uint8_t * hmac) {
-    unsigned int hmac_length = 64/*Provide the size of the hmac buffer*/;
+    unsigned int hmac_length = 64/*Provide the size of the hmac inputBuffer*/;
     ConsumeDataAndFillRestWithZeros(hmac, hmac_length);
     uint8_t cifuzz_var_3 = fdp->ConsumeIntegral<uint8_t>();
     return cifuzz_var_3;
