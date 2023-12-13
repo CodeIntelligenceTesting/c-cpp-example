@@ -1,4 +1,4 @@
-#include "key_management_module_1.h"
+#include "key_management_1.h"
 
 uint8_t * generate_random_bytes(uint8_t * buffer, uint8_t length) {
     for (int i = 0; i < length; i++) {

@@ -1,8 +1,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "crypto_module_1.h"
-#include "crypto_module_2.h"
+#include "crypto_1.h"
+#include "crypto_2.h"
 
 
 static enum crypto_state current_state = uninitialized;

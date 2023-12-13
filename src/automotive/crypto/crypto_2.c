@@ -1,7 +1,7 @@
-#include "crypto_module_types.h"
-#include "crypto_module_2.h"
+#include "crypto_types.h"
+#include "crypto_2.h"
 
-#include "time_module_1.h"
+#include "time_1.h"
 
 #include <limits.h>
 

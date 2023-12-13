@@ -1,12 +1,12 @@
 #include <string.h>
 
-#include "GPS_module_types.h"
-#include "GPS_module_1.h"
+#include "gps_types.h"
+#include "gps_1.h"
 
-#include "crypto_module_types.h"
-#include "crypto_module_1.h"
+#include "crypto_types.h"
+#include "crypto_1.h"
 
-#include "key_management_module_1.h"
+#include "key_management_1.h"
 
 GPS_position current_destination;
 

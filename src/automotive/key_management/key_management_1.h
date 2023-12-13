@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "key_management_module_types.h"
+#include "key_management_types.h"
 
 extern uint8_t HSM_get_random_byte();
 
