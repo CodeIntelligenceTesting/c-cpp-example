@@ -12,3 +12,12 @@ target_include_directories(automotive PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/key_management
     ${CMAKE_CURRENT_SOURCE_DIR}/time
 )
+
+add_fuzz_test(automotive_fuzzer
+    fuzz_test.cpp
+    mocks.cpp
+)
+
+target_link_libraries(automotive_fuzzer
+    automotive
+)
