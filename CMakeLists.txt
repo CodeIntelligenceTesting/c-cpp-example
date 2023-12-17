@@ -14,5 +14,8 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/external)
 enable_testing()
 include(googletest)
 
+find_package(cifuzz NO_SYSTEM_ENVIRONMENT_PATH)
+enable_fuzz_testing()
+
 add_subdirectory(src/explore_me)
 add_subdirectory(src/automotive)
