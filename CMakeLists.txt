@@ -1,18 +1,18 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
-project(AUTOMOTIVE-FUZZING-EXAMPLE)
+project(cpp-demo)
 
-add_library(AUTOMOTIVE-FUZZING-EXAMPLE
-    modules/crypto_module/src/crypto_module_1.c
-    modules/crypto_module/src/crypto_module_2.c
-    modules/time_module/src/time_module_1.c
-    modules/GPS_module/src/GPS_module_1.c
-    modules/key_management_module/src/key_management_module_1.c
-)
+# Export compilation database
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-target_include_directories(AUTOMOTIVE-FUZZING-EXAMPLE PRIVATE
-    modules/crypto_module/src
-    modules/time_module/src
-    modules/key_management_module/src
-    modules/GPS_module/src
-)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# External dependencies
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/external)
+
+enable_testing()
+include(googletest)
+
+add_subdirectory(src/explore_me)
+add_subdirectory(src/automotive)
