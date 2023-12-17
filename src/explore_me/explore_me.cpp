@@ -1,9 +1,6 @@
-#include <stdexcept>
-
-#include "explore_me.h"
-
 #include <cstring>
 
+#include "explore_me.h"
 #include "utils.h"
 
 static long insecureEncrypt(long input);
