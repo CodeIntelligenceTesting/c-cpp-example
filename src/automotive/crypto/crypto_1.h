@@ -5,8 +5,9 @@
 
 #include "crypto_types.h"
 
-// extern uint8_t third_party_library_calc_hmac(uint8_t * const message, int len, char * const key, char * const nonce, uint8_t * hmac);
-extern uint8_t third_party_library_calc_hmac(const uint8_t * message, int len, const char * key, const char * nonce, uint8_t * hmac);
+extern uint8_t third_party_library_calc_hmac(const uint8_t *message, int len,
+                                             const char *key, const char *nonce,
+                                             uint8_t *hmac);
 
 void crypto_init();
 
@@ -16,8 +17,10 @@ enum crypto_return_status crypto_set_key(crypto_key key);
 
 enum crypto_return_status crypto_set_nonce(crypto_nonce nonce);
 
-enum crypto_return_status crypto_calculate_hmac(const uint8_t * message, int len, crypto_hmac * hmac);
+enum crypto_return_status crypto_calculate_hmac(const uint8_t *message, int len,
+                                                crypto_hmac *hmac);
 
-enum crypto_return_status crypto_verify_hmac(const uint8_t * message, int len, crypto_hmac * hmac);
+enum crypto_return_status crypto_verify_hmac(const uint8_t *message, int len,
+                                             crypto_hmac *hmac);
 
 #endif
