@@ -34,4 +34,13 @@ foreach(TestType IN ITEMS
     )
 
     add_test(explore_me.${TestType} ${TestType}_test)
+
+    add_fuzz_test(${TestType}_fuzz_test
+        ${TestType}_test.cpp
+    )
+
+    target_link_libraries(${TestType}_fuzz_test
+        explore_me
+        ${GTEST_BOTH_LIBRARIES}
+    )
 endforeach(TestType )
