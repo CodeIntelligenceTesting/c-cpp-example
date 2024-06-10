@@ -11,21 +11,21 @@ TEST(ExploreCustomMutatorExampleChecks, DeveloperTest) {
     SpecialRequirementsStruct inputStruct = (SpecialRequirementsStruct) {.a=0, .b= 10, .c= 0, .c_size= 0};
     inputStruct.c = malloc(sizeof("Developer"));
     inputStruct.c_size = sizeof("Developer");
-    EXPECT_NO_THROW(ExploreCustomMutatorExampleChecks(inputStruct));
+    EXPECT_NO_THROW(ExploreCustomMutatorExampleChecks(&inputStruct));
 }
 
 TEST(ExploreStructuredInputChecks, MaintainerTest) {
     InputStrut inputStruct = (InputStruct) {.a=20, .b= -10, .c=0};
     inputStruct.c = malloc(sizeof("Maintainer"));
     inputStruct.c_size = sizeof("Maintainer");
-    EXPECT_NO_THROW(ExploreCustomMutatorExampleChecks(inputStruct));
+    EXPECT_NO_THROW(ExploreCustomMutatorExampleChecks(&inputStruct));
 }
 
 #endif
 
 FUZZ_TEST(const uint8_t *data, size_t size) {
     SpecialRequirementsStruct* inputStruct = (SpecialRequirementsStruct*) data;
-    ExploreCustomMutatorExampleChecks(*inputStruct);
+    ExploreCustomMutatorExampleChecks(inputStruct);
 
     free(inputStruct->c);
 }
@@ -33,22 +33,32 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
 
 extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *data, size_t size,
                                           size_t maxSize, unsigned int seed) {
+    std::cout << "In custom mutator.\n";
+
     FuzzedDataProvider fdp(data, size);
     long a = fdp.ConsumeIntegral<long>();
     long b = fdp.ConsumeIntegral<long>();
-    const char* tempC = fdp.ConsumeRemainingBytesAsString().c_str();
-    size_t c_size= strlen(tempC) +1;
+    std::string tempC = fdp.ConsumeRemainingBytesAsString();
+    size_t c_size= strlen(tempC.c_str()) +1;
     char* c = (char*) malloc(c_size);
-    strncpy(c, tempC, c_size);
+    strncpy(c, tempC.c_str(), c_size);
     SpecialRequirementsStruct specialRequirementsStruct = (SpecialRequirementsStruct) {
         .a= a, .b=b, .c_size=c_size, .c= c
     };
+    size_t size1 = sizeof(specialRequirementsStruct);
 
-    free(data);
-    data = (uint8_t*) malloc (sizeof(specialRequirementsStruct));
-    std::memcpy(data, &specialRequirementsStruct, sizeof(specialRequirementsStruct));
+    if (maxSize >= size1) {
+        free(data);
+        data = (uint8_t*) malloc (size1);
+        std::memcpy(data, &specialRequirementsStruct, size1);
+        return sizeof(specialRequirementsStruct);
+    } else {
+        return maxSize;
+    }
 
-    std::cout << "In custom mutator.\n";
 
-    return sizeof(specialRequirementsStruct);
+
+
+
+
 }

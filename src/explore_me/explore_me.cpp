@@ -41,11 +41,11 @@ void ExploreStructuredInputChecks(InputStruct inputStruct){
     }
 }
 
-void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct specialRequirementsStruct){
-    strncpy(specialRequirementsStruct.c, "Hello", specialRequirementsStruct.c_size);
+void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct* specialRequirementsStruct){
+    strncpy(specialRequirementsStruct->c, "Hello\0", specialRequirementsStruct->c_size);
 
-    if (insecureEncrypt(specialRequirementsStruct.a) == 0x4e9e91e6677cfff3L) {
-        if (insecureEncrypt(specialRequirementsStruct.b) == 0x4f8b9fb34431d9d3L) {
+    if (insecureEncrypt(specialRequirementsStruct->a) == 0x4e9e91e6677cfff3L) {
+        if (insecureEncrypt(specialRequirementsStruct->b) == 0x4f8b9fb34431d9d3L) {
             trigger_memory_leak();
         }
     }

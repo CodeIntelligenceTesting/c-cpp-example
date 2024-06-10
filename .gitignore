@@ -5,3 +5,4 @@ cmake-build-debug
 
 /**/.cifuzz-*
 /**/*fuzzer_inputs
+/**/*fuzz_test_inputs

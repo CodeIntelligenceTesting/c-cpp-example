@@ -26,4 +26,4 @@ void ExploreComplexChecks(long a, long b, std::string c);
 
 void ExploreStructuredInputChecks(InputStruct inputStrut);
 
-void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct specialRequirementsStruct);
+void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct* specialRequirementsStruct);
