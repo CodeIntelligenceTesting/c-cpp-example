@@ -7,13 +7,13 @@
 #include <gtest/gtest.h>
 
 TEST(ExploreStructuredInputChecks, DeveloperTest) {
-    InputStrut inputStrut = (InputStrut) {.a=0, .b= 10, .c="Developer"};
-    EXPECT_NO_THROW(ExploreStructuredInputChecks(inputStrut));
+    InputStruct inputStruct = (InputStrut) {.a=0, .b= 10, .c="Developer"};
+    EXPECT_NO_THROW(ExploreStructuredInputChecks(inputStruct));
 }
 
 TEST(ExploreStructuredInputChecks, MaintainerTest) {
-    InputStrut inputStrut = (InputStrut) {.a=20, .b= -10, .c="Maintainer"};
-    EXPECT_NO_THROW(ExploreStructuredInputChecks(inputStrut));
+    InputStruct inputStruct = (InputStruct) {.a=20, .b= -10, .c="Maintainer"};
+    EXPECT_NO_THROW(ExploreStructuredInputChecks(inputStruct));
 }
 
 #endif
@@ -23,7 +23,7 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
     int a = fdp.ConsumeIntegral<int>();
     int b = fdp.ConsumeIntegral<int>();
     std::string c = fdp.ConsumeRemainingBytesAsString();
-    InputStrut inputStrut = (InputStrut) {.a=a, .b= b, .c=c};
+    InputStruct inputStruct = (InputStruct) {.a=a, .b= b, .c=c};
 
-    ExploreStructuredInputChecks(inputStrut);
+    ExploreStructuredInputChecks(inputStruct);
 }

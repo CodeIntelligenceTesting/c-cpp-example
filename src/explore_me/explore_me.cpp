@@ -31,12 +31,22 @@ void ExploreComplexChecks(long a, long b, std::string c) {
   }
 }
 
-void ExploreStructuredInputChecks(InputStrut inputStrut){
-    if (EncodeBase64(inputStrut.c) == "SGV5LCB3ZWw=") {
-        if (insecureEncrypt(inputStrut.a) == 0x4e9e91e6677cfff3L) {
-            if (insecureEncrypt(inputStrut.b) == 0x4f8b9fb34431d9d3L) {
+void ExploreStructuredInputChecks(InputStruct inputStruct){
+    if (EncodeBase64(inputStruct.c) == "SGV5LCB3ZWw=") {
+        if (insecureEncrypt(inputStruct.a) == 0x4e9e91e6677cfff3L) {
+            if (insecureEncrypt(inputStruct.b) == 0x4f8b9fb34431d9d3L) {
                 trigger_double_free();
             }
+        }
+    }
+}
+
+void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct specialRequirementsStruct){
+    strncpy(specialRequirementsStruct.c, "Hello", specialRequirementsStruct.c_size);
+
+    if (insecureEncrypt(specialRequirementsStruct.a) == 0x4e9e91e6677cfff3L) {
+        if (insecureEncrypt(specialRequirementsStruct.b) == 0x4f8b9fb34431d9d3L) {
+            trigger_memory_leak();
         }
     }
 }

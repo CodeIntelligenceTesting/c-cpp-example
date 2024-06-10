@@ -7,16 +7,23 @@
 
 #include <string>
 
-struct InputStrut {
+struct InputStruct {
     long a;
     long b;
     std::string c;
+};
+
+struct SpecialRequirementsStruct {
+    long a;
+    long b;
+    size_t c_size;
+    char* c;
 };
 
 void ExploreSimpleChecks(int a, int b, std::string c);
 
 void ExploreComplexChecks(long a, long b, std::string c);
 
-void ExploreStructuredInputChecks(InputStrut inputStrut);
+void ExploreStructuredInputChecks(InputStruct inputStrut);
 
-void ExploreCustomMutatorExampleChecks(long a, long b, std::string c);
+void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct specialRequirementsStruct);

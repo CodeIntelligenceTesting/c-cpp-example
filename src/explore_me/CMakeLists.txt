@@ -19,6 +19,7 @@ foreach(TestType IN ITEMS
     simple_checks
     complex_checks
     structured_input_checks
+    custom_mutator_example_checks
 )
 
     add_executable(${TestType}_test
