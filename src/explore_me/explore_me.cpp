@@ -6,6 +6,8 @@
 static long insecureEncrypt(long input);
 static void trigger_global_buffer_overflow(const std::string &c);
 static void trigger_use_after_free();
+static void trigger_double_free();
+static void trigger_memory_leak();
 
 void ExploreSimpleChecks(int a, int b, std::string c) {
   if (a >= 20000) {
@@ -29,6 +31,16 @@ void ExploreComplexChecks(long a, long b, std::string c) {
   }
 }
 
+void ExploreStructuredInputChecks(InputStrut inputStrut){
+    if (EncodeBase64(inputStrut.c) == "SGV5LCB3ZWw=") {
+        if (insecureEncrypt(inputStrut.a) == 0x4e9e91e6677cfff3L) {
+            if (insecureEncrypt(inputStrut.b) == 0x4f8b9fb34431d9d3L) {
+                trigger_double_free();
+            }
+        }
+    }
+}
+
 static long insecureEncrypt(long input) {
   long key = 0xefe4eb93215cb6b0L;
   return input ^ key;
@@ -48,3 +60,18 @@ static void trigger_use_after_free() {
   free(buffer);
   printf("%s\n", buffer);
 }
+
+static void trigger_double_free(){
+    auto *buffer = static_cast<char *>(malloc(6));
+    memcpy(buffer, "hello", 5);
+    buffer[5] = '\0';
+    for (int i = 0; i < 2; i++) {
+        free(buffer);
+    }
+}
+
+static void trigger_memory_leak(){
+    auto *buffer = static_cast<char *>(malloc(6));
+    memcpy(buffer, "hello", 5);
+    buffer[5] = '\0';
+    }

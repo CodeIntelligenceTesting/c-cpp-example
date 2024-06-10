@@ -18,6 +18,7 @@ target_link_libraries(explore_me
 foreach(TestType IN ITEMS
     simple_checks
     complex_checks
+    structured_input_checks
 )
 
     add_executable(${TestType}_test
