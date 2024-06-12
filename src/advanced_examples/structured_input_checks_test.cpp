@@ -20,10 +20,14 @@ TEST(ExploreStructuredInputChecks, MaintainerTest) {
 
 FUZZ_TEST(const uint8_t *data, size_t size) {
     FuzzedDataProvider fdp(data, size);
-    int a = fdp.ConsumeIntegral<int>();
-    int b = fdp.ConsumeIntegral<int>();
+    long a = fdp.ConsumeIntegral<long>();
+    long b = fdp.ConsumeIntegral<long>();
     std::string c = fdp.ConsumeRemainingBytesAsString();
-    InputStruct inputStruct = (InputStruct) {.a=a, .b= b, .c=c};
 
+    InputStruct inputStruct = (InputStruct) {
+        .a = a,
+        .b = b,
+        .c = c,
+    };
     ExploreStructuredInputChecks(inputStruct);
 }
