@@ -20,10 +20,6 @@ struct SpecialRequirementsStruct {
     char* c;
 };
 
-void ExploreSimpleChecks(int a, int b, std::string c);
-
-void ExploreComplexChecks(long a, long b, std::string c);
-
 void ExploreStructuredInputChecks(InputStruct inputStrut);
 
 void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct* specialRequirementsStruct);

@@ -31,15 +31,15 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
 }
 
 
-extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *data, size_t size,
-                                          size_t maxSize, unsigned int seed) {
+extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *Data, size_t Size,
+                                          size_t MaxSize, unsigned int Seed) {
     std::cout << "In custom mutator.\n";
 
-    FuzzedDataProvider fdp(data, size);
+    FuzzedDataProvider fdp(Data, Size);
     long a = fdp.ConsumeIntegral<long>();
     long b = fdp.ConsumeIntegral<long>();
     std::string tempC = fdp.ConsumeRemainingBytesAsString();
-    size_t c_size= strlen(tempC.c_str()) +1;
+    size_t c_size = strlen(tempC.c_str()) +1;
     char* c = (char*) malloc(c_size);
     strncpy(c, tempC.c_str(), c_size);
     SpecialRequirementsStruct specialRequirementsStruct = (SpecialRequirementsStruct) {
@@ -47,18 +47,12 @@ extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *data, size_t size,
     };
     size_t size1 = sizeof(specialRequirementsStruct);
 
-    if (maxSize >= size1) {
-        free(data);
-        data = (uint8_t*) malloc (size1);
-        std::memcpy(data, &specialRequirementsStruct, size1);
+    if (MaxSize >= size1) {
+        free(Data);
+        Data = (uint8_t*) malloc (size1);
+        std::memcpy(Data, &specialRequirementsStruct, size1);
         return sizeof(specialRequirementsStruct);
     } else {
-        return maxSize;
+        return MaxSize;
     }
-
-
-
-
-
-
 }

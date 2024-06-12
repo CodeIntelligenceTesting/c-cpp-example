@@ -1,7 +1,6 @@
 #include <cstring>
 
 #include "explore_me.h"
-#include "utils.h"
 
 static long insecureEncrypt(long input);
 static void trigger_global_buffer_overflow(const std::string &c);
@@ -21,18 +20,8 @@ void ExploreSimpleChecks(int a, int b, std::string c) {
   }
 }
 
-void ExploreComplexChecks(long a, long b, std::string c) {
-  if (EncodeBase64(c) == "SGV5LCB3ZWw=") {
-    if (insecureEncrypt(a) == 0x4e9e91e6677cfff3L) {
-      if (insecureEncrypt(b) == 0x4f8b9fb34431d9d3L) {
-        trigger_use_after_free();
-      }
-    }
-  }
-}
-
 void ExploreStructuredInputChecks(InputStruct inputStruct){
-    if (EncodeBase64(inputStruct.c) == "SGV5LCB3ZWw=") {
+    if (inputStruct.c == "Attacker") {
         if (insecureEncrypt(inputStruct.a) == 0x4e9e91e6677cfff3L) {
             if (insecureEncrypt(inputStruct.b) == 0x4f8b9fb34431d9d3L) {
                 trigger_double_free();
@@ -42,6 +31,7 @@ void ExploreStructuredInputChecks(InputStruct inputStruct){
 }
 
 void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct* specialRequirementsStruct){
+    printf("Hello!\n");
     strncpy(specialRequirementsStruct->c, "Hello\0", specialRequirementsStruct->c_size);
 
     if (insecureEncrypt(specialRequirementsStruct->a) == 0x4e9e91e6677cfff3L) {

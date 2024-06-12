@@ -17,5 +17,6 @@ include(googletest)
 find_package(cifuzz NO_SYSTEM_ENVIRONMENT_PATH)
 enable_fuzz_testing()
 
-add_subdirectory(src/explore_me)
+add_subdirectory(src/simple_examples)
 add_subdirectory(src/automotive)
+add_subdirectory(src/advanced_examples)

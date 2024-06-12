@@ -16,10 +16,10 @@ issues in large code bases such as Google Chrome.
 In this example, we demonstrate how you can use CI Fuzz to integrate fuzz testing into your 
 C/C++ projects. The example project uses [CMake](https://cmake.org/) as the build system and contains
 the following three use cases:
-* [Simple Checks Example](src/explore_me/explore_me.cpp#L10): 
+* [Simple Checks Example](src/simple_examples/explore_me.cpp#L10): 
 A simple example that triggers a buffer over when the input parameters satisfy certain criteria.
 We show that CI Fuzz can quickly generate a test case that trigger this bug.
-* [Complex Checks Example](src/explore_me/explore_me.cpp#L22):
+* [Complex Checks Example](src/simple_examples/explore_me.cpp#L22):
 A more complex example that triggers a use-after-free bug when the input parameters satisfy 
 certain criteria. In this example, the checks are more complex and involve Base64 encoding 
 and XORing with constant value, making it more challenging to find the correct combination of

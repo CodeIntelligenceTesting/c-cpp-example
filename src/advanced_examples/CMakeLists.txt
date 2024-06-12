@@ -1,23 +1,20 @@
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL REQUIRED)
 
-add_library(explore_me
+add_library(explore_me_advanced
     explore_me.cpp
-    utils.cpp
 )
 
-target_include_directories(explore_me PRIVATE
+target_include_directories(explore_me_advanced PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${OpenSSL_INCLUDE_DIR}
 )
 
-target_link_libraries(explore_me
+target_link_libraries(explore_me_advanced
     OpenSSL::Crypto
 )
 
 foreach(TestType IN ITEMS
-    simple_checks
-    complex_checks
     structured_input_checks
     custom_mutator_example_checks
 )
@@ -31,7 +28,7 @@ foreach(TestType IN ITEMS
     )
 
     target_link_libraries(${TestType}_test
-        explore_me
+        explore_me_advanced
         ${GTEST_BOTH_LIBRARIES}
     )
 
@@ -42,7 +39,7 @@ foreach(TestType IN ITEMS
     )
 
     target_link_libraries(${TestType}_fuzz_test
-        explore_me
+        explore_me_advanced
         ${GTEST_BOTH_LIBRARIES}
     )
 endforeach(TestType )
