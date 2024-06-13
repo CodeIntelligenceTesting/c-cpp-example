@@ -37,6 +37,5 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
 extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *Data, size_t Size,
                                           size_t MaxSize, unsigned int Seed) {
     std::cout << "In custom mutator.\n";
-
     return Size;
 }

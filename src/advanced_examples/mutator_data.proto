@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package fuzzing;
+
+message DataStruct {
+  optional int64 a = 1;
+  optional int64 b = 2;
+  optional bytes c = 3;
+}

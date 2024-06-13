@@ -1,6 +1,11 @@
 set(OPENSSL_USE_STATIC_LIBS TRUE)
+option(LIB_PROTO_MUTATOR_DOWNLOAD_PROTOBUF
+        "Automatically download working protobuf" OFF)
+include(libprotobuf-mutator)
 find_package(OpenSSL REQUIRED)
-#include(libprotobuf-mutator)
+find_package(Protobuf REQUIRED)
+find_package(absl CONFIG)
+
 
 add_library(explore_me_advanced
     explore_me.cpp
@@ -44,3 +49,31 @@ foreach(TestType IN ITEMS
         ${GTEST_BOTH_LIBRARIES}
     )
 endforeach(TestType )
+
+protobuf_generate_cpp(
+        PROTO_SRCS
+        PROTO_HDRS
+        mutator_data.proto
+)
+
+add_library(protobuf_mutator OBJECT
+        ${PROTO_SRCS}
+        ${PROTO_HDRS}
+)
+
+target_include_directories(protobuf_mutator PUBLIC
+        ${CMAKE_CURRENT_BINARY_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${LIB_PROTOBUF_MUTATOR_INCLUDE_DIR}
+        ${Protobuf_INCLUDE_DIR}
+)
+
+target_link_libraries(protobuf_mutator PUBLIC
+        ${Lib_Protobuf_Mutator_LIBRARIES}
+        ${Protobuf_LIBRARIES}
+        absl::log_internal_check_op
+        explore_me_advanced
+)
+
+add_fuzz_test(protobuf_mutator_example_fuzz_test protobuf_mutator_example_fuzz_test.cpp)
+target_link_libraries(protobuf_mutator_example_fuzz_test explore_me_advanced protobuf_mutator)

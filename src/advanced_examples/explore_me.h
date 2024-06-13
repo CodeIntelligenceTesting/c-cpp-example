@@ -13,13 +13,4 @@ struct InputStruct {
     std::string c;
 };
 
-struct SpecialRequirementsStruct {
-    long a;
-    long b;
-    size_t c_size;
-    char* c;
-};
-
 void ExploreStructuredInputChecks(InputStruct inputStrut);
-
-void ExploreCustomMutatorExampleChecks(SpecialRequirementsStruct* specialRequirementsStruct);
