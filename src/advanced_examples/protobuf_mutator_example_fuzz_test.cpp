@@ -15,6 +15,8 @@
 // we created a protobuf message that corresponds to the input
 // data that is received by a simple parser API.
 DEFINE_PROTO_FUZZER(const fuzzing::DataStruct &input) {
-
+    InputStruct *inputStruct =
+            reinterpret_cast <InputStruct *>(input);
+    ExploreStructuredInputChecks(*inputStruct);
 }
 

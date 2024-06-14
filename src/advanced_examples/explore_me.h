@@ -13,4 +13,4 @@ struct InputStruct {
     std::string c;
 };
 
-void ExploreStructuredInputChecks(InputStruct inputStrut);
+void ExploreStructuredInputChecks(InputStruct inputStruct);

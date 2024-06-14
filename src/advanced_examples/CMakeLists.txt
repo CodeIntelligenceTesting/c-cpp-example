@@ -1,7 +1,6 @@
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 option(LIB_PROTO_MUTATOR_DOWNLOAD_PROTOBUF
         "Automatically download working protobuf" OFF)
-include(libprotobuf-mutator)
 find_package(OpenSSL REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(absl CONFIG)
