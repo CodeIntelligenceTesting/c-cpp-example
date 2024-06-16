@@ -17,13 +17,5 @@ TEST(ExploreComplexChecksTests, MaintainerTest) {
 #endif
 
 FUZZ_TEST(const uint8_t *data, size_t size) {
-  FuzzedDataProvider fdp(data, size);
-  long a = fdp.ConsumeIntegral<long>();
-  long b = fdp.ConsumeIntegral<long>();
-  size_t c_size = fdp.ConsumeIntegralInRange(1, 20);
-  char* c = (char*) malloc(c_size);
-  c[c_size-1] = '\0';
-
-  FunctionTwo(a, b, c, c_size);
-  free(c);
+    // TODO write fuzz test yourself!
 }

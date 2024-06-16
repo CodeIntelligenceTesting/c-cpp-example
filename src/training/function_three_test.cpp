@@ -19,11 +19,5 @@ TEST(ExploreSimpleChecksTests, MaintainerTest) {
 #endif
 
 FUZZ_TEST(const uint8_t *data, size_t size) {
-  FuzzedDataProvider fdp(data, size);
-  int a = fdp.ConsumeIntegral<int>();
-  int b = fdp.ConsumeIntegral<int>();
-  std::string c = fdp.ConsumeRemainingBytesAsString();
-  struct InputStruct inputStruct = { a, b, c};
-
-  FunctionThree(inputStruct);
+    // TODO write fuzz test yourself!
 }
