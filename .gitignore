@@ -4,4 +4,4 @@ build
 cmake-build-debug
 
 /**/.cifuzz-*
-/**/*fuzzer_inputs
+/**/*inputs

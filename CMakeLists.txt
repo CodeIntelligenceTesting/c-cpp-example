@@ -19,3 +19,4 @@ enable_fuzz_testing()
 
 add_subdirectory(src/explore_me)
 add_subdirectory(src/automotive)
+add_subdirectory(src/training)
