@@ -12,5 +12,3 @@
 bool EqualsIgnoreCase(const std::string &a, const std::string &b);
 
 std::string EncodeBase64(const std::string &input);
-
-int min(int a, int b);

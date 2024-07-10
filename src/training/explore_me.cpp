@@ -21,10 +21,10 @@ void FunctionOne(int a, int b, std::string c) {
 }
 
 void FunctionTwo(long a, long b, char* c, size_t size) {
-    memcpy(c, "hello", min(5, size));
-    c[min(6, size-1)] = '\0';
-
     if (a >= 20000) {
+        // Trap that can trigger an unimportant finding that's caused by a faulty fuzz test.
+        memcpy(c, "hello", std::min(static_cast<long>(5), static_cast<long>(size)));
+        c[std::min(static_cast<long>(6), std::max(static_cast<long>(size)-1, 0L))] = '\0';
         if (b >= 2000000) {
             if (b - a < 100000) {
                 trigger_stack_overflow(a);

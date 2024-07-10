@@ -29,12 +29,3 @@ std::string EncodeBase64(const std::string &input) {
   BUF_MEM_free(bufferPtr);
   return ret;
 }
-
-
-int min(int a, int b) {
-    if (a <= b) {
-        return a;
-    } else {
-        return b;
-    }
-}
