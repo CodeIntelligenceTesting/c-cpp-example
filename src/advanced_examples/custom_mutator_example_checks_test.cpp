@@ -38,5 +38,5 @@ extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *Data, size_t Size,
                                           size_t MaxSize, unsigned int Seed) {
     std::cout << "In custom mutator.\n";
 
-    return Size;
+    return MaxSize;
 }
