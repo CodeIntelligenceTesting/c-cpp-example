@@ -1,0 +1,100 @@
+{
+	"version": 3,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 20,
+		"patch": 0
+	},
+	"configurePresets": [
+		{
+			"name": "cifuzz (Coverage)",
+			"displayName": "cifuzz (Coverage)",
+			"binaryDir": "${sourceDir}/.cifuzz-build/replayer/gcov",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "RelWithDebInfo",
+				"CIFUZZ_ENGINE": "replayer",
+				"CIFUZZ_SANITIZERS": "gcov",
+				"CIFUZZ_TESTING": {
+					"type": "BOOL",
+					"value": "ON"
+				},
+				"CMAKE_BUILD_RPATH_USE_ORIGIN": {
+					"type": "BOOL",
+					"value": "ON"
+				}
+			}
+		},
+		{
+			"name": "cifuzz (Fuzzing)",
+			"displayName": "cifuzz (Fuzzing)",
+			"binaryDir": "${sourceDir}/.cifuzz-build/libfuzzer/address+undefined",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "RelWithDebInfo",
+				"CIFUZZ_ENGINE": "libfuzzer",
+				"CIFUZZ_SANITIZERS": "address;undefined",
+				"CIFUZZ_TESTING": {
+					"type": "BOOL",
+					"value": "ON"
+				},
+				"CMAKE_BUILD_RPATH_USE_ORIGIN": {
+					"type": "BOOL",
+					"value": "ON"
+				}
+			},
+			"environment": {
+				"CC": "clang",
+				"CXX": "clang++"
+			}
+		},
+		{
+			"name": "cifuzz (Regression Test)",
+			"displayName": "cifuzz (Regression Test)",
+			"binaryDir": "${sourceDir}/.cifuzz-build/replayer/address+undefined",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "RelWithDebInfo",
+				"CIFUZZ_ENGINE": "replayer",
+				"CIFUZZ_SANITIZERS": "address;undefined",
+				"CIFUZZ_TESTING": {
+					"type": "BOOL",
+					"value": "ON"
+				},
+				"CMAKE_BUILD_RPATH_USE_ORIGIN": {
+					"type": "BOOL",
+					"value": "ON"
+				}
+			}
+		}
+	],
+	"buildPresets": [
+		{
+			"name": "cifuzz (Coverage)",
+			"displayName": "cifuzz (Coverage)",
+			"configurePreset": "cifuzz (Coverage)",
+			"configuration": "RelWithDebInfo"
+		},
+		{
+			"name": "cifuzz (Fuzzing)",
+			"displayName": "cifuzz (Fuzzing)",
+			"configurePreset": "cifuzz (Fuzzing)",
+			"configuration": "RelWithDebInfo"
+		},
+		{
+			"name": "cifuzz (Regression Test)",
+			"displayName": "cifuzz (Regression Test)",
+			"configurePreset": "cifuzz (Regression Test)",
+			"configuration": "RelWithDebInfo"
+		}
+	],
+	"testPresets": [
+		{
+			"name": "cifuzz (Regression Test)",
+			"displayName": "cifuzz (Regression Test)",
+			"configurePreset": "cifuzz (Regression Test)",
+			"filter": {
+				"include": {
+					"label": "^cifuzz_regression_test$"
+				}
+			}
+		}
+	]
+}

@@ -27,3 +27,6 @@ input parameters that trigger the bug.
 * [Automotive Example](src/automotive):
 An example that demonstrates the challenges of creating high-quality fuzz tests for complex 
 projects with a large public API. We demonstrate how we can automate most of this task with CI Spark.
+
+
+If you want to use the devcontainer environment then export your cifuzz download token to a environment var called "CIFUZZ_CREDENTIALS" like `export CIFUZZ_CREDENTIALS=[my_token]`.
