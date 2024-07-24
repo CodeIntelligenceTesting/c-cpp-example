@@ -7,8 +7,6 @@
 #ifndef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
 #include <gtest/gtest.h>
 
-extern "C" size_t LLVMFuzzerMutate(uint8_t *Data, size_t Size, size_t MaxSize);
-
 TEST(ExploreStructuredInputChecks, DeveloperTest) {
     InputStruct inputStruct = (InputStrut) {.a=0, .b= 10, .c="Developer"};
     EXPECT_NO_THROW(ExploreStructuredInputChecks(inputStruct));
@@ -35,6 +33,7 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
     ExploreStructuredInputChecks(inputStruct);
 }
 
+extern "C" size_t LLVMFuzzerMutate(uint8_t *Data, size_t Size, size_t MaxSize);
 extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *Data, size_t Size,
                                           size_t MaxSize, unsigned int Seed) {
 
@@ -43,5 +42,6 @@ extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *Data, size_t Size,
         std::cerr << "In custom mutator.\n";
         Printed = true;
     }
-    return 0; //LLVMFuzzerMutate(Data, Size, MaxSize);
+
+    return LLVMFuzzerMutate(Data, Size, MaxSize);
 }
