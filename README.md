@@ -37,7 +37,12 @@ Execute with:
 ```bash
 cifuzz run custom_mutator_example_checks_fuzz_test
 ```
-
+* [Protobuf Mutator Example](src/advanced_examples/protobuf_mutator_example_fuzz_test.cpp#L17):
+An example that is build on top of the [Structure Aware Inputs Example](src/advanced_examples/explore_me.cpp#L8) as well and shows how to utilize the protobuf mutator framework to generate the inputs.
+Execute with:
+```bash
+cifuzz run protobuf_mutator_example_fuzz_test
+```
 
 To execute all fuzz tests at the same time, or calculate the code coverage for all, just skip the fuzz target name. Like:
 ```bash
