@@ -1,10 +1,11 @@
 set(OPENSSL_USE_STATIC_LIBS TRUE)
-option(LIB_PROTO_MUTATOR_DOWNLOAD_PROTOBUF
-        "Automatically download working protobuf" ON)
+
+
+#option(LIB_PROTO_MUTATOR_DOWNLOAD_PROTOBUF "Automatically download working protobuf" ON)
 find_package(OpenSSL REQUIRED)
-find_package(Protobuf REQUIRED)
-find_package(absl CONFIG)
-include(libprotobuf-mutator)
+
+include(external/protobuf)
+include(external/libprotobuf-mutator)
 add_compile_options(-O0)
 
 add_library(explore_me_advanced
@@ -71,7 +72,6 @@ target_include_directories(protobuf_mutator PUBLIC
 target_link_libraries(protobuf_mutator PUBLIC
         ${Lib_Protobuf_Mutator_LIBRARIES}
         ${Protobuf_LIBRARIES}
-        absl::log_internal_check_op
         explore_me_advanced
 )
 
