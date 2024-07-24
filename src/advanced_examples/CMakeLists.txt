@@ -4,7 +4,8 @@ option(LIB_PROTO_MUTATOR_DOWNLOAD_PROTOBUF
 find_package(OpenSSL REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(absl CONFIG)
-
+#include(libprotobuf-mutator)
+add_compile_options(-O0)
 
 add_library(explore_me_advanced
     explore_me.cpp
