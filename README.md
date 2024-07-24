@@ -38,7 +38,7 @@ Execute with:
 cifuzz run custom_mutator_example_checks_fuzz_test
 ```
 * [Protobuf Mutator Example](src/advanced_examples/protobuf_mutator_example_fuzz_test.cpp#L17):
-An example that is build on top of the [Structure Aware Inputs Example](src/advanced_examples/explore_me.cpp#L8) as well and shows how to utilize the protobuf mutator framework to generate the inputs.
+An example that is build on top of the [Structure Aware Inputs Example](src/advanced_examples/explore_me.cpp#L8) as well and shows how to utilize the protobuf mutator framework to generate the inputs. Builds necessary dependencies and can take up to 15 min to complete building.
 Execute with:
 ```bash
 cifuzz run protobuf_mutator_example_fuzz_test
