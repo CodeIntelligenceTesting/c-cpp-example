@@ -3,15 +3,7 @@
 </a>
 
 # Testing C/C++ for Security and Reliability
-Building robust C/C++ applications is a highly challenging endeavor that requires thorough testing.
-While C/C++ enables us to write high-performance code, the memory-unsafety nature of the language
-brings a broad spectrum of security risks. Memory corruption issues constitute the vast majority of
-bugs and security vulnerabilities found in C/C++ projects, and their impact is best demonstrated by the
-[Heartbleed](https://en.wikipedia.org/wiki/Heartbleed) bug on OpenSSL.
-Regular unit and integration tests are essential to test that our code functions correctly,
-they are not enough to uncover memory-corruption bugs.
-On the other hand, fuzz testing has established itself as the best practical method to find these
-issues in large code bases such as Google Chrome.
+Building robust C/C++ applications is a highly challenging endeavor that requires thorough testing. While C/C++ enables us to write high-performance code, the memory-unsafety nature of the language brings a broad spectrum of security risks. Memory corruption issues constitute the vast majority of bugs and security vulnerabilities found in C/C++ projects, and their impact is best demonstrated by the [Heartbleed](https://en.wikipedia.org/wiki/Heartbleed) bug on OpenSSL. Regular unit and integration tests are essential to test that our code functions correctly - they are not enough to uncover memory-corruption bugs. On the other hand, fuzz testing has established itself as the best practical method to find these issues in large code bases such as Google Chrome.
 
 In this example, we demonstrate how you can use CI Fuzz to integrate fuzz testing into your C/C++ projects. The example project uses [CMake](https://cmake.org/) as the build system and contains the following use cases:
 * [Simple Checks Example](src/simple_examples/explore_me.cpp#L10):
