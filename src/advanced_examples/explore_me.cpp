@@ -13,6 +13,8 @@ void ExploreStructuredInputChecks(InputStruct inputStruct){
             }
         }
     }
+
+    return;
 }
 
 static long insecureEncrypt(long input) {
@@ -27,4 +29,5 @@ static void trigger_double_free(){
     for (int i = 0; i < 2; i++) {
         free(buffer);
     }
+    buffer = 0;
 }

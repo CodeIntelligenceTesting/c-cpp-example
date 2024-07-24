@@ -1,6 +1,7 @@
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL REQUIRED)
 #include(libprotobuf-mutator)
+add_compile_options(-O0)
 
 add_library(explore_me_advanced
     explore_me.cpp
