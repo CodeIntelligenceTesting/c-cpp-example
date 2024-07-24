@@ -27,4 +27,4 @@ An example that shows how to fuzz an API that requires structured inputs, with t
 * [Custom Mutator Example](src/advanced_examples/custom_mutator_example_checks_test.cpp#L37):
 An example that is build on top of the [Structure Aware Inputs Example](src/advanced_examples/explore_me.cpp#L8) and shows how to utilize custom mutators to change how the inputs are mutated.
 
-If you want to use the devcontainer environment then export your cifuzz download token to a environment var called "CIFUZZ_CREDENTIALS" like `export CIFUZZ_CREDENTIALS=[my_token]`.
+To use the devcontainer environment you need to export your cifuzz download token to a environment var called "CIFUZZ_CREDENTIALS" like `export CIFUZZ_CREDENTIALS=[my_token]`.
