@@ -3,9 +3,6 @@ set(OPENSSL_USE_STATIC_LIBS TRUE)
 
 #option(LIB_PROTO_MUTATOR_DOWNLOAD_PROTOBUF "Automatically download working protobuf" ON)
 find_package(OpenSSL REQUIRED)
-
-include(external/protobuf)
-include(external/libprotobuf-mutator)
 add_compile_options(-O0)
 
 add_library(explore_me_advanced
@@ -51,29 +48,30 @@ foreach(TestType IN ITEMS
     )
 endforeach(TestType )
 
-protobuf_generate_cpp(
-        PROTO_SRCS
-        PROTO_HDRS
-        mutator_data.proto
+add_custom_command(OUTPUT
+    ${CMAKE_CURRENT_BINARY_DIR}/mutator_data.pb.h
+    ${CMAKE_CURRENT_BINARY_DIR}/mutator_data.pb.cc
+    COMMAND protobuf::protoc mutator_data.proto
+    --proto_path=${CMAKE_CURRENT_SOURCE_DIR}
+    --cpp_out=${CMAKE_CURRENT_BINARY_DIR}
 )
 
 add_library(protobuf_mutator OBJECT
-        ${PROTO_SRCS}
-        ${PROTO_HDRS}
+    ${CMAKE_CURRENT_BINARY_DIR}/mutator_data.pb.cc
 )
 
 target_include_directories(protobuf_mutator PUBLIC
-        ${CMAKE_CURRENT_BINARY_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}
-        ${LIB_PROTOBUF_MUTATOR_INCLUDE_DIR}
-        ${Protobuf_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 target_link_libraries(protobuf_mutator PUBLIC
-        ${Lib_Protobuf_Mutator_LIBRARIES}
-        ${Protobuf_LIBRARIES}
-        explore_me_advanced
+    protobuf-mutator-libfuzzer
+    explore_me_advanced
 )
 
 add_fuzz_test(protobuf_mutator_example_fuzz_test protobuf_mutator_example_fuzz_test.cpp)
 target_link_libraries(protobuf_mutator_example_fuzz_test explore_me_advanced protobuf_mutator)
+target_link_options(protobuf_mutator_example_fuzz_test PRIVATE
+    "-Wl,--copy-dt-needed-entries"
+)
