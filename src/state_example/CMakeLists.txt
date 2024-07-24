@@ -1,4 +1,4 @@
-add_library(automotive
+add_library(state
     crypto/crypto_1.c
     crypto/crypto_2.c
     gps/gps_1.c
@@ -6,18 +6,18 @@ add_library(automotive
     time/time_1.c
 )
 
-target_include_directories(automotive PUBLIC
+target_include_directories(state PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/crypto
     ${CMAKE_CURRENT_SOURCE_DIR}/gps
     ${CMAKE_CURRENT_SOURCE_DIR}/key_management
     ${CMAKE_CURRENT_SOURCE_DIR}/time
 )
 
-add_fuzz_test(automotive_fuzzer
+add_fuzz_test(state_fuzzer
     fuzz_test.cpp
     mocks.cpp
 )
 
-target_link_libraries(automotive_fuzzer
-    automotive
+target_link_libraries(state_fuzzer
+    state
 )
