@@ -78,13 +78,6 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
           sizeof(uint8_t) * GetFDP()->ConsumeIntegral<uint16_t>());
       const uint8_t *message = (const uint8_t *)message_vec.data();
 
-      // The parameter "len" seems to represent the length of a buffer/array. In
-      // this case, we usually don't want to provide fuzzer-generated lengths
-      // that differ from the actual length of the buffer. If you confirm that
-      // the parameter is a length parameter, you can get the length of the
-      // fuzzer-generated buffer as follows (replace "buffer" with the actual
-      // variable):
-      //     int len = buffer.size();
       int len = message_vec.size();
       crypto_hmac hmac_tmp = {};
       ConsumeDataAndFillRestWithZeros(hmac_tmp.hmac, 64);
@@ -108,13 +101,6 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
           sizeof(uint8_t) * GetFDP()->ConsumeIntegral<uint16_t>());
       const uint8_t *message = (const uint8_t *)message_vec.data();
 
-      // The parameter "len" seems to represent the length of a buffer/array. In
-      // this case, we usually don't want to provide fuzzer-generated lengths
-      // that differ from the actual length of the buffer. If you confirm that
-      // the parameter is a length parameter, you can get the length of the
-      // fuzzer-generated buffer as follows (replace "buffer" with the actual
-      // variable):
-      //     int len = buffer.size();
       int len = message_vec.size();
       crypto_hmac hmac_tmp = {};
       ConsumeDataAndFillRestWithZeros(hmac_tmp.hmac, 64);
@@ -169,13 +155,6 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
           sizeof(uint8_t) * GetFDP()->ConsumeIntegral<uint16_t>());
       uint8_t *key = (uint8_t *)key_vec.data();
 
-      // The parameter "length" seems to represent the length of a buffer/array.
-      // In this case, we usually don't want to provide fuzzer-generated lengths
-      // that differ from the actual length of the buffer. If you confirm that
-      // the parameter is a length parameter, you can get the length of the
-      // fuzzer-generated buffer as follows (replace "buffer" with the actual
-      // variable):
-      //     uint8_t length = buffer.size();
       uint8_t length = key_vec.size();
 
       key_management_create_key(key, length);
@@ -187,13 +166,6 @@ FUZZ_TEST(const uint8_t *data, size_t size) {
           sizeof(uint8_t) * GetFDP()->ConsumeIntegral<uint16_t>());
       uint8_t *nonce = (uint8_t *)nonce_vec.data();
 
-      // The parameter "length" seems to represent the length of a buffer/array.
-      // In this case, we usually don't want to provide fuzzer-generated lengths
-      // that differ from the actual length of the buffer. If you confirm that
-      // the parameter is a length parameter, you can get the length of the
-      // fuzzer-generated buffer as follows (replace "buffer" with the actual
-      // variable):
-      //     uint8_t length = buffer.size();
       uint8_t length = nonce_vec.size();
 
       key_management_create_nonce(nonce, length);
