@@ -14,6 +14,7 @@ target_include_directories(explore_me_advanced PRIVATE
 
 target_link_libraries(explore_me_advanced
     OpenSSL::Crypto
+    -lz
 )
 
 foreach(TestType IN ITEMS
