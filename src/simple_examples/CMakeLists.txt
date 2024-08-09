@@ -1,6 +1,9 @@
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL REQUIRED)
 
+add_compile_options(-fsanitize=address,undefined)
+add_link_options(-fsanitize=address,undefined)
+
 add_library(explore_me
     explore_me.cpp
     utils.cpp
@@ -37,6 +40,8 @@ foreach(TestType IN ITEMS
 
     add_fuzz_test(${TestType}_fuzz_test
         ${TestType}_test.cpp
+        TEST_FRAMEWORK 
+        GTEST
     )
 
     target_link_libraries(${TestType}_fuzz_test

@@ -5,8 +5,6 @@
 #include <zlib.h>
 
 #include "explore_me.h"
-
-#ifndef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
 #include <gtest/gtest.h>
 
 TEST(ExploreCompressedInputChecks, HI) {
@@ -36,8 +34,6 @@ TEST(ExploreCompressedInputChecks, HO) {
     }
     EXPECT_NO_THROW(ExploreCompressedInputChecks(compressed, compressedLen));
 }
-
-#endif
 
 FUZZ_TEST(const uint8_t *data, size_t size) {
     ExploreCompressedInputChecks(data, size);
