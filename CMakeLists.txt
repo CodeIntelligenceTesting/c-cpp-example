@@ -8,14 +8,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# External dependencies
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/external)
-
-enable_testing()
-include(googletest)
 
 find_package(cifuzz NO_SYSTEM_ENVIRONMENT_PATH)
+enable_testing()
 enable_fuzz_testing()
+# External dependencies
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/external)
+include(googletest)
+
+
 
 add_subdirectory(src/simple_examples)
 add_subdirectory(src/state_example)
