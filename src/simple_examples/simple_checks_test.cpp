@@ -14,6 +14,7 @@ TEST(ExploreSimpleChecksTests, MaintainerTest) {
 }
 
 DEBUG_FINDING(awesome_gnu)
+
 FUZZ_TEST(const uint8_t *data, size_t size) {
   FuzzedDataProvider fdp(data, size);
   int a = fdp.ConsumeIntegral<int>();
