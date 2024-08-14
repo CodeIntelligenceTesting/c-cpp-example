@@ -13,6 +13,4 @@ lcov.info
 .cifuzz-findings/*
 !.cifuzz-findings/awesome_gnu/
 
-.cifuzz-findings/awesome_gnu/*
-!.cifuzz-findings/awesome_gnu/finding.json
-!.cifuzz-findings/awesome_gnu/crashing-input
+.cifuzz-findings/awesome_gnu/.lock
