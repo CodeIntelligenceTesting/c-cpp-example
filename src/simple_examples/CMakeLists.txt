@@ -42,6 +42,8 @@ foreach(TestType IN ITEMS
         ${TestType}_test.cpp
         TEST_FRAMEWORK 
         GTEST
+        TEST_FRAMEWORK_LIBS
+        ${GTEST_BOTH_LIBRARIES}
     )
 
     target_link_libraries(${TestType}_fuzz_test
