@@ -8,15 +8,17 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+FetchContent_MakeAvailable(googletest)
 
 find_package(cifuzz NO_SYSTEM_ENVIRONMENT_PATH)
 enable_testing()
+include(GoogleTest)
 enable_fuzz_testing()
-# External dependencies
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/external)
-include(googletest)
-
-
 
 add_subdirectory(src/simple_examples)
 add_subdirectory(src/state_example)
