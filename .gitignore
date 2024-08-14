@@ -1,9 +1,18 @@
-build
-.vscode
-.idea
-cmake-build-debug
+build/
+.vscode/
+.idea/
+cmake-build-debug/
 
-/**/.cifuzz-*
-/**/*fuzz*_inputs
+.cifuzz-*/
+*fuzz*_inputs
 
-/**/lcov.info
+lcov.info
+
+!.cifuzz-findings/
+
+.cifuzz-findings/*
+!.cifuzz-findings/awesome_gnu/
+
+.cifuzz-findings/awesome_gnu/*
+!.cifuzz-findings/awesome_gnu/finding.json
+!.cifuzz-findings/awesome_gnu/crashing-input
