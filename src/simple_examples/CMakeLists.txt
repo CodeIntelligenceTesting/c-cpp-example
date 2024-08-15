@@ -46,5 +46,6 @@ foreach(TestType IN ITEMS
 
     target_link_libraries(${TestType}_fuzz_test
         explore_me
+        GTest::gtest
     )
 endforeach(TestType )

@@ -32,7 +32,7 @@ foreach(TestType IN ITEMS
 
     target_link_libraries(${TestType}_test
         explore_me_advanced
-        ${GTEST_BOTH_LIBRARIES}
+        GTest::gtest_main
     )
 
     add_test(explore_me.${TestType} ${TestType}_test)
@@ -43,6 +43,6 @@ foreach(TestType IN ITEMS
 
     target_link_libraries(${TestType}_fuzz_test
         explore_me_advanced
-        ${GTEST_BOTH_LIBRARIES}
+        GTest::gtest
     )
 endforeach(TestType )
