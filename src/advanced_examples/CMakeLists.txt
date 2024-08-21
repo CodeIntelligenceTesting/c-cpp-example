@@ -31,6 +31,7 @@ foreach(TestType IN ITEMS
     )
 
     target_link_libraries(${TestType}_test
+        /usr/lib/clang/${CMAKE_C_COMPILER_VERSION}/lib/linux/libclang_rt.fuzzer_no_main-${CMAKE_SYSTEM_PROCESSOR}.a
         explore_me_advanced
         GTest::gtest_main
     )
@@ -42,7 +43,8 @@ foreach(TestType IN ITEMS
     )
 
     target_link_libraries(${TestType}_fuzz_test
+        /usr/lib/clang/${CMAKE_C_COMPILER_VERSION}/lib/linux/libclang_rt.fuzzer_no_main-${CMAKE_SYSTEM_PROCESSOR}.a
         explore_me_advanced
-        GTest::gtest
+        GTest::gtest        
     )
 endforeach(TestType )
