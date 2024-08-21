@@ -15,5 +15,14 @@ TEST(ExploreSimpleChecksTests, MaintainerTest) {
 }
 
 FUZZ_TEST(const uint8_t *data, size_t size) {
-    // TODO write fuzz test yourself!
+  // transforming fuzzing data into the format we need for testing the target function
+  FuzzedDataProvider fdp(data, size);
+  struct InputStruct inputStruct = { 
+    fdp.ConsumeIntegral<int>(),
+    fdp.ConsumeIntegral<int>(), 
+    fdp.ConsumeRemainingBytesAsString()
+  };
+
+  // calling the target function with the transformed fuzzing data
+  FunctionThree(inputStruct);
 }
