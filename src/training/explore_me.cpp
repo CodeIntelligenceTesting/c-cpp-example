@@ -6,7 +6,7 @@
 static long insecureEncrypt(long input);
 static void trigger_global_buffer_overflow(const std::string &c);
 static void trigger_use_after_free();
-static long trigger_stack_overflow(long a);
+static long trigger_stack_exhaustion(long a);
 
 void FunctionOne(int a, int b, std::string c) {
     if (a >= 20000) {
@@ -27,7 +27,7 @@ void FunctionTwo(long a, long b, char* c, size_t size) {
         c[std::min(static_cast<long>(6), std::max(static_cast<long>(size)-1, 0L))] = '\0';
         if (b >= 2000000) {
             if (b - a < 100000) {
-                trigger_stack_overflow(a);
+                trigger_stack_exhaustion(a);
             }
         }
     }
@@ -65,9 +65,9 @@ static void trigger_use_after_free() {
   printf("%s\n", buffer);
 }
 
-static long trigger_stack_overflow(long a) {
+static long trigger_stack_exhaustion(long a) {
     if (a > 0) {
-        return trigger_stack_overflow(a-1) * 2;
+        return trigger_stack_exhaustion(a-1) * 2;
     }
 
     return 1;
