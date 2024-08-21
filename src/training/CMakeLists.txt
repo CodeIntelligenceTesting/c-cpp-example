@@ -38,6 +38,8 @@ foreach(TestType IN ITEMS
 
     add_fuzz_test(${TestType}_fuzz_test
         ${TestType}_test.cpp
+        TEST_FRAMEWORK 
+        GTEST
     )
 
     target_link_libraries(${TestType}_fuzz_test
