@@ -1,17 +1,17 @@
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL REQUIRED)
 
-add_library(training_explore_me
+add_library(explore_me_training
     explore_me.cpp
     utils.cpp
 )
 
-target_include_directories(training_explore_me PRIVATE
+target_include_directories(explore_me_training PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${OpenSSL_INCLUDE_DIR}
 )
 
-target_link_libraries(training_explore_me
+target_link_libraries(explore_me_training
     OpenSSL::Crypto
 )
 
@@ -30,18 +30,18 @@ foreach(TestType IN ITEMS
     )
 
     target_link_libraries(${TestType}_test
-        training_explore_me
-        ${GTEST_BOTH_LIBRARIES}
+        explore_me_training
+        GTest::gtest_main
     )
 
-    add_test(training_explore_me.${TestType} ${TestType}_test)
+    add_test(explore_me_training.${TestType} ${TestType}_test)
 
     add_fuzz_test(${TestType}_fuzz_test
         ${TestType}_test.cpp
     )
 
     target_link_libraries(${TestType}_fuzz_test
-        training_explore_me
-        ${GTEST_BOTH_LIBRARIES}
+        explore_me_training
+        GTest::gtest
     )
 endforeach(TestType )

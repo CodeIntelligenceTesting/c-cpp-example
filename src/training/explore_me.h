@@ -6,6 +6,8 @@
 #pragma once
 
 #include <string>
+#include <stdint.h>
+#include <stddef.h>
 
 struct InputStruct{
     int a;

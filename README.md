@@ -32,7 +32,7 @@ Execute with:
 cifuzz run structured_input_checks_fuzz_test
 ```
 * [Custom Mutator Example](src/advanced_examples/custom_mutator_example_checks_test.cpp#L37):
-An example that is build on top of the [Structure Aware Inputs Example](src/advanced_examples/explore_me.cpp#L8) and shows how to utilize custom mutators to change how the inputs are mutated.
+An example that shows how to utilize custom mutators to make sure the fuzzer only creates valid inputs.
 Execute with:
 ```sh
 cifuzz run custom_mutator_example_checks_fuzz_test
