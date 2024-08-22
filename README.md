@@ -5,7 +5,7 @@
 # Testing C/C++ for Security and Reliability
 Building robust C/C++ applications is a highly challenging endeavor that requires thorough testing. While C/C++ enables us to write high-performance code, the memory-unsafety nature of the language brings a broad spectrum of security risks. Memory corruption issues constitute the vast majority of bugs and security vulnerabilities found in C/C++ projects, and their impact is best demonstrated by the [Heartbleed](https://en.wikipedia.org/wiki/Heartbleed) bug on OpenSSL. Regular unit and integration tests are essential to test that our code functions correctly - they are not enough to uncover memory-corruption bugs. (Whitebox and smart) Fuzz testing on the other hand, has established itself as the best practical method to find these issues in large code bases such as Google Chrome.
 
-In this example, we demonstrate how you can use CI Fuzz to integrate fuzz testing into your C/C++ projects. The example project uses [CMake](https://cmake.org/) as the build system and contains the following use cases:
+In this example, we demonstrate how you can use CI Fuzz to integrate fuzz testing into your C/C++ projects. The example project uses [CMake](https://cmake.org/) as the build system and contains the following examples:
 * [Simple Checks Example](src/simple_examples/explore_me.cpp#L10):
 A simple example that triggers a buffer over when the input parameters satisfy certain criteria.
 We show that CI Fuzz can quickly generate a test case that trigger this bug.
@@ -36,6 +36,12 @@ An example that shows how to utilize custom mutators to make sure the fuzzer onl
 Execute with:
 ```sh
 cifuzz run custom_mutator_example_checks_fuzz_test
+```
+* [Slow Input Example](src/advanced_examples/slow_input_checks_test.cpp#L17):
+An example that shows how the fuzzer can detect inputs that lead to a slow program execution.
+Execute with:
+```sh
+cifuzz run slow_input_checks_fuzz_test
 ```
 * [Trainings Examples](src/training):
 These are very simple example functions for you to train on. You can execute them with the following commands:
