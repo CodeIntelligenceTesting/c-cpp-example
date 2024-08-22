@@ -1,0 +1,17 @@
+{
+  "name": "philosophical_capybara",
+  "type": "WARNING",
+  "input_data": "inGKcf+S3ESO5gI73P////////8BAFBgAABaIP9DjuaC",
+  "logs": [
+    "Slow input: 38 seconds for processing",
+    "artifact_prefix='/tmp/libfuzzer-out-2077056338/'; Test unit written to .cifuzz-findings/philosophical_capybara/crashing-input",
+    "Base64: inGKcf+S3ESO5gI73P////////8BAFBgAABaIP9DjuaC"
+  ],
+  "details": "Slow input detected. Processing time: 38 s",
+  "more_details": {
+    "id": "slow_input"
+  },
+  "created_at": "2024-08-22T09:02:49.692610917Z",
+  "input_file": ".cifuzz-findings/philosophical_capybara/crashing-input",
+  "fuzz_test": "slow_input_checks_fuzz_test"
+}
