@@ -1,5 +1,6 @@
 #include <cstring>
 #include <zlib.h>
+#include <iostream>
 #include "explore_me.h"
 
 static long insecureEncrypt(long input);
@@ -30,6 +31,20 @@ void ExploreCompressedInputChecks(const uint8_t *Data, size_t Size){
       if (Uncompressed[0] == 'C' && Uncompressed[1] == 'I') {
           trigger_double_free();
       }
+}
+
+void ExploreSlowInputsChecks(int a, int b){
+    if (a == 48664131) {
+        for (int i = 0; i < b; i++) {
+            if (i % 100'000'000 == 0) {
+                std::cerr   << "In loop at position: " 
+                            << std::to_string(i) 
+                            << " of " 
+                            << std::to_string(b) 
+                            << std::endl;
+            }
+        }
+    }
 }
 
 static long insecureEncrypt(long input) {

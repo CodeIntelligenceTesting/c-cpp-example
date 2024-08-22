@@ -49,6 +49,7 @@ endif()
 foreach(TestType IN ITEMS
     structured_input_checks
     custom_mutator_example_checks
+    slow_input_checks
 )
 
     add_executable(${TestType}_test
@@ -69,6 +70,8 @@ foreach(TestType IN ITEMS
 
     add_fuzz_test(${TestType}_fuzz_test
         ${TestType}_test.cpp
+        TEST_FRAMEWORK 
+        GTEST
     )
 
     target_link_libraries(${TestType}_fuzz_test
