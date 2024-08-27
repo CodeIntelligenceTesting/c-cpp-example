@@ -1,9 +1,17 @@
-build
-.vscode
-.idea
-cmake-build-debug
+build/
+.vscode/
+.idea/
+cmake-build-debug/
 
-/**/.cifuzz-*
-/**/*fuzz*_inputs
+.cifuzz-*/
+*fuzz*_inputs
 
-/**/lcov.info
+lcov.info
+
+!.cifuzz-findings/
+
+.cifuzz-findings/*
+!.cifuzz-findings/awesome_gnu/
+.cifuzz-findings/awesome_gnu/.lock
+!.cifuzz-findings/philosophical_capybara/
+.cifuzz-findings/philosophical_capybara/.lock

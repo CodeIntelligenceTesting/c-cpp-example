@@ -11,7 +11,7 @@
 #include <gtest/gtest.h>
 
 TEST(ExploreStructuredInputChecks, DeveloperTest) {
-    InputStruct inputStruct = (InputStrut) {.a=0, .b= 10, .c="Developer"};
+    InputStruct inputStruct = (InputStruct) {.a=0, .b= 10, .c="Developer"};
     EXPECT_NO_THROW(ExploreStructuredInputChecks(inputStruct));
 }
 
