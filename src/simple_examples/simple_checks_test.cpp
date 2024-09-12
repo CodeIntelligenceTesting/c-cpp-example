@@ -13,7 +13,7 @@ TEST(ExploreSimpleChecksTests, MaintainerTest) {
   EXPECT_NO_THROW(ExploreSimpleChecks(20, -10, "Maintainer"));
 }
 
-DEBUG_FINDING(awesome_gnu)
+DEBUG_FINDING(unruffled_labrador)
 
 FUZZ_TEST(const uint8_t *data, size_t size) {
   FuzzedDataProvider fdp(data, size);
