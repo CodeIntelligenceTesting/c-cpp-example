@@ -1,0 +1,5 @@
+add_library(upper_case_processor STATIC upper_case_processor.cpp)
+
+target_include_directories(upper_case_processor PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(upper_case_processor data_processor)
