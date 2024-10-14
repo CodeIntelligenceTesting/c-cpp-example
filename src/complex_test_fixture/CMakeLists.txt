@@ -1,0 +1,6 @@
+add_subdirectory(metrics)
+add_subdirectory(publishers)
+add_subdirectory(subscribers)
+add_subdirectory(base)
+add_subdirectory(child)
+add_subdirectory(test)
