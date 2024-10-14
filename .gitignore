@@ -11,7 +11,7 @@ lcov.info
 !.cifuzz-findings/
 
 .cifuzz-findings/*
-!.cifuzz-findings/awesome_gnu/
-.cifuzz-findings/awesome_gnu/.lock
-!.cifuzz-findings/philosophical_capybara/
-.cifuzz-findings/philosophical_capybara/.lock
+!.cifuzz-findings/unruffled_labrador/
+.cifuzz-findings/unruffled_labrador/.lock
+!.cifuzz-findings/predictive_ant/
+.cifuzz-findings/predictive_ant/.lock

@@ -1,0 +1,27 @@
+{
+  "name": "predictive_ant",
+  "type": "WARNING",
+  "input_data": "inGKcf+S3ESO5gI73P///zvc/////////wEBAP9DjuaC",
+  "logs": [
+    "Slow input: 27 seconds for processing",
+    "artifact_prefix='/tmp/libfuzzer-out-3809360830/'; Test unit written to .cifuzz-findings/predictive_ant/crashing-input",
+    "Base64: inGKcf+S3ESO5gI73P///zvc/////////wEBAP9DjuaC",
+    "In loop at position: 0 of 922747137",
+    "In loop at position: 100000000 of 922747137",
+    "In loop at position: 200000000 of 922747137",
+    "In loop at position: 300000000 of 922747137",
+    "In loop at position: 400000000 of 922747137",
+    "In loop at position: 500000000 of 922747137",
+    "In loop at position: 600000000 of 922747137",
+    "In loop at position: 700000000 of 922747137",
+    "In loop at position: 800000000 of 922747137",
+    "In loop at position: 900000000 of 922747137"
+  ],
+  "details": "Slow input detected. Processing time: 27 s",
+  "more_details": {
+    "id": "slow_input"
+  },
+  "created_at": "2024-09-12T17:54:29.70674698+02:00",
+  "input_file": ".cifuzz-findings/predictive_ant/crashing-input",
+  "fuzz_test": "slow_input_checks_fuzz_test"
+}
