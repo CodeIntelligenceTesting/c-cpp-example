@@ -5,12 +5,16 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"options": [
-			"--secret=id=credentials,env=CIFUZZ_CREDENTIALS"
+			"--secret=id=CIFUZZ_CREDENTIALS,env=CIFUZZ_CREDENTIALS"
 		]
+	},
+	"remoteEnv": {
+		"CIFUZZ_LLM_API_TOKEN": "${localEnv:CIFUZZ_LLM_API_TOKEN}"
 	},
 	"features": {
 		"ghcr.io/devcontainers-community/features/llvm:3": {}
 	},
+	
 	"customizations": {
 		"vscode": {
 			"extensions": [
