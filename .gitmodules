@@ -1,0 +1,4 @@
+[submodule ".devcontainer"]
+	path = .devcontainer
+	url = git@github.com:CodeIntelligenceTesting/.devcontainer.git
+	branch = adjust-for-submodules
