@@ -9,7 +9,7 @@ These examples require libssl-dev and libzstd-dev installed on Ubuntu. To instal
 ```sh
 sudo apt install libssl-dev libzstd-dev -y
 ```
-If you do not want to install both packages, you can also comment out the include of the simple_examples folder in the main [CMakeLists.txt](CMakeLists.txt#L23) file.
+If you do not want to install both packages, you can use a devcontainer to run the examples, or comment out the include of the simple_examples folder in the main [CMakeLists.txt](CMakeLists.txt#L23) file.
 
 In this example, we demonstrate how you can use CI Fuzz to integrate fuzz testing into your C/C++ projects. The example project uses [CMake](https://cmake.org/) as the build system and contains the following examples:
 * [Simple Checks Example](src/simple_examples/explore_me.cpp#L10):
@@ -74,4 +74,4 @@ or:
 cifuzz coverage
 ```
 
-To use the devcontainer environment you need to export your cifuzz download token to a environment var called "CIFUZZ_CREDENTIALS" like `export CIFUZZ_CREDENTIALS=[my_token]`.
+To make use of the devcontainer setup please run ```git submodule update --init --recursive``` and have a look at the [submodule readme](.devcontainer/README.md#L1). The second README will only be available after running the command git submodule update.
