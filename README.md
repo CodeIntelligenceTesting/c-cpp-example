@@ -60,4 +60,4 @@ or:
 cifuzz coverage
 ```
 
-To make use of the devcontainer setup please run ```git submodule update --init --recursive``` and have a look at the [submodule readme](.decvonatiner/README.md#L1). The second README will only be available after running the command above.
+To make use of the devcontainer setup please run ```git submodule update --init --recursive``` and have a look at the [submodule readme](.devcontainer/README.md#L1). The second README will only be available after running the command git submodule update.
