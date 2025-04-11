@@ -32,7 +32,8 @@ engine-args:
 # - -rss_limit_mb=4096
 
 ## Maximum time to run all fuzz tests. The default is to run for 10 minutes.
-max-fuzzing-duration: 30m
+max-fuzzing-duration: 0
+max-idle-time: 0
 ## Set to true to print output of the `cifuzz run` command as JSON.
 #print-json: true
 
