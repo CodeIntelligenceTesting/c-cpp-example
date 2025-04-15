@@ -37,12 +37,6 @@ Execute with:
 ```sh
 cifuzz run structured_input_checks_fuzz_test
 ```
-* [Custom Mutator Example](src/advanced_examples/custom_mutator_example_checks_test.cpp#L37):
-An example that shows how to utilize custom mutators to make sure the fuzzer only creates valid inputs.
-Execute with:
-```sh
-cifuzz run custom_mutator_example_checks_fuzz_test
-```
 * [Slow Input Example](src/advanced_examples/slow_input_checks_test.cpp#L17):
 An example that shows how the fuzzer can detect inputs that lead to a slow program execution.
 Execute with:
