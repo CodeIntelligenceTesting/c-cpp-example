@@ -49,18 +49,12 @@ engine-args:
   - -use_value_profile=1 # Only use value profile with libFuzzer! Never use it with Honggfuzz!
 # - -rss_limit_mb=4096
 
-<<<<<<< HEAD
-## Maximum time to run all fuzz tests. The default is to run for 10 minutes.
-max-fuzzing-duration: 0
-max-idle-time: 0
-=======
 ## Maximum time to run all fuzz tests. Default is 10 minutes. The time will be
 ## split up evenly between multiple fuzz tests. To keep running indefinitely,
 ## set value to 0.
 max-fuzzing-duration: 0
 max-idle-time: 0
 
->>>>>>> main
 ## Set to true to print output of the `cifuzz run` command as JSON.
 #print-json: true
 
