@@ -16,39 +16,8 @@ target_link_libraries(explore_me_advanced
     -lz
 )
 
-
-#
-# Block defining the location of the fuzzer_no_main library that is needed to compile this example
-#
-
-# Uncomment and change to your own path if you want to specify a specific fuzzer_no_main library
-#set(FUZZER_NO_MAIN_PATH /usr/lib/clang/${CMAKE_C_COMPILER_VERSION}/lib/linux/libclang_rt.fuzzer_no_main-${CMAKE_SYSTEM_PROCESSOR}.a)
-
-
-# If location is not manually defined, we search for it.
-if (NOT DEFINED FUZZER_NO_MAIN_PATH)
-    execute_process(COMMAND clang --print-file-name libclang_rt.fuzzer_no_main-${CMAKE_SYSTEM_PROCESSOR}.a 
-        OUTPUT_VARIABLE FUZZER_NO_MAIN_PATH 
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-
-    # If the first search was not successful, we check if the dependency is there, but does not contain the architecture information
-    # in its name, as it is common if you compile the sources yourself.
-    if(NOT ${FUZZER_NO_MAIN_PATH} MATCHES "\/")
-        execute_process(COMMAND clang --print-file-name libclang_rt.fuzzer_no_main.a 
-            OUTPUT_VARIABLE FUZZER_NO_MAIN_PATH 
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-        )
-    endif()
-endif()
-
-#
-# End of fuzzer_no_main definition
-#
-
 foreach(TestType IN ITEMS
     structured_input_checks
-    custom_mutator_example_checks
     slow_input_checks
 )
 
@@ -61,7 +30,6 @@ foreach(TestType IN ITEMS
     )
 
     target_link_libraries(${TestType}_test
-        ${FUZZER_NO_MAIN_PATH}
         explore_me_advanced
         GTest::gtest_main
     )
@@ -75,7 +43,6 @@ foreach(TestType IN ITEMS
     )
 
     target_link_libraries(${TestType}_fuzz_test
-        ${FUZZER_NO_MAIN_PATH}
         explore_me_advanced
         GTest::gtest        
     )
