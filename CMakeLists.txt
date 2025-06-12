@@ -20,6 +20,8 @@ enable_testing()
 include(GoogleTest)
 enable_fuzz_testing()
 
+set(CMAKE_CXX_COMPILER clang++)
+set(CMAKE_C_COMPILER clang)
+add_compile_options("-fsanitize=fuzzer,address")
+
 add_subdirectory(src/simple_examples)
-add_subdirectory(src/state_example)
-add_subdirectory(src/advanced_examples)

@@ -36,7 +36,18 @@ foreach(TestType IN ITEMS
         GTest::gtest_main
     )
 
-    gtest_discover_tests(${TestType}_test)
+    if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+        target_link_libraries(${TestType}_test
+                -Wl,-whole-archive
+                /usr/lib/llvm-19/lib/clang/19/lib/linux/libclang_rt.fuzzer_no_main-x86_64.a
+                -Wl,-no-whole-archive
+        )
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+        target_link_libraries(${TestType}_test
+                -Wl,-all_load
+                #  fill here
+        )
+    endif()
 
     add_fuzz_test(${TestType}_fuzz_test
         ${TestType}_test.cpp
