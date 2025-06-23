@@ -1,5 +1,5 @@
 ## Configuration for a CI Fuzz project
-## Generated on 2025-04-15
+## Generated on 2025-06-23
 
 ## The build system used to build this project. If not set, cifuzz tries to
 ## detect the build system automatically.
@@ -8,7 +8,13 @@ build-system: cmake
 
 ## Engine used for fuzzing, default is "libfuzzer-clang".
 ## Valid values: "libfuzzer-clang", "honggfuzz-clang", "honggfuzz-gcc"
-#engine: honggfuzz-gcc
+engine: libfuzzer-clang
+
+## Sanitizers to use when building fuzz tests. If not set, ASan and UBSan
+## are used by default.
+#sanitizers:
+# - address
+# - undefined
 
 ## If the build system type is "other", this command is used to build the fuzz
 ## tests.
@@ -27,6 +33,7 @@ build-system: cmake
 #build-system-args:
 # - -DBUILD_TESTS=ON
 
+
 ## Directories containing sample inputs used as seeds for running fuzz tests.
 ## For general information on seed corpora, see:
 ## https://docs.code-intelligence.com/glossary#seed-corpus
@@ -43,11 +50,16 @@ build-system: cmake
 ## For libFuzzer see: https://llvm.org/docs/LibFuzzer.html#dictionaries
 #dict: path/to/dictionary.dct
 
-## Command-line arguments to pass to the fuzzing engine when running fuzz tests.
-## For libFuzzer see: https://llvm.org/docs/LibFuzzer.html#options
-engine-args:
-  - -use_value_profile=1 # Only use value profile with libFuzzer! Never use it with Honggfuzz!
+## Command-line arguments to pass to libFuzzer when running fuzz tests.
+## See https://llvm.org/docs/LibFuzzer.html#options for possible options.
+libfuzzer-args:
+  - -use_value_profile=1
 # - -rss_limit_mb=4096
+
+## Command-line arguments to pass to Honggfuzz when running fuzz tests.
+## See https://github.com/google/honggfuzz/blob/master/docs/USAGE.md for possible options.
+#honggfuzz-args:
+# - --rlimit_rss=4096
 
 ## Maximum time to run all fuzz tests. Default is 10 minutes. The time will be
 ## split up evenly between multiple fuzz tests. To keep running indefinitely,
