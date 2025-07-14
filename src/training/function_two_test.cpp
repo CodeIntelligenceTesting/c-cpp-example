@@ -15,8 +15,8 @@ TEST(ExploreComplexChecksTests, MaintainerTest) {
 FUZZ_TEST(const uint8_t *data, size_t size) {
   // transforming fuzzing data into the format we need for testing the target function
   FuzzedDataProvider fdp(data, size);
-  int a = fdp.ConsumeIntegral<int>();
-  int b = fdp.ConsumeIntegral<int>();
+  long a = fdp.ConsumeIntegral<long>();
+  long b = fdp.ConsumeIntegral<long>();
   std::string c = fdp.ConsumeRemainingBytesAsString();
 
   // calling the target function with the transformed fuzzing data
