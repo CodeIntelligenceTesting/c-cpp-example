@@ -16,7 +16,7 @@ TEST(ExploreSimpleChecksTests, MaintainerTest) {
 DEBUG_FINDING(unruffled_labrador)
 
 FUZZ_TEST(const uint8_t *data, size_t size) {
-  FuzzedDataProvider fdp(data, size);
+  FuzzedDataProviderrr fdp(data, size);
   int a = fdp.ConsumeIntegral<int>();
   int b = fdp.ConsumeIntegral<int>();
   std::string c = fdp.ConsumeRemainingBytesAsString();
