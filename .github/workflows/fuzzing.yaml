@@ -41,7 +41,7 @@ jobs:
         uses: "actions/checkout@v4"
 
       - name: Install CI Fuzz
-        uses: "CodeIntelligenceTesting/actions/install-cifuzz@v1"
+        uses: "CodeIntelligenceTesting/actions/install-cifuzz@v2"
         with:
           version: latest
           download-token: ${{ secrets.CIFUZZ_DOWNLOAD_TOKEN }}
@@ -54,7 +54,7 @@ jobs:
       #     rclone copy -v cloud-storage:corpora/PROJECT_NAME .cifuzz-corpus
 
       - name: Run fuzzing
-        uses: "CodeIntelligenceTesting/actions/run-fuzzing@v1"
+        uses: "CodeIntelligenceTesting/actions/run-fuzzing@v2"
         with:
           duration: 15s
 
@@ -64,7 +64,8 @@ jobs:
       #     rclone copy -v .cifuzz-corpus cloud-storage:corpora/PROJECT_NAME
 
       - name: Upload code-scanning report
-        uses: "CodeIntelligenceTesting/actions/upload-code-scanning-report@v1"
+        if: always()
+        uses: "CodeIntelligenceTesting/actions/upload-code-scanning-report@v2"
 
       # Uncomment this step if you want to commit all Findings found when running this workflow:
       # - name: Commit Findings to repository
@@ -75,20 +76,3 @@ jobs:
       #     git commit -m "Automated commit of CI Fuzz Findings"
       #     git push
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: cifuzz-coverage
-          path: coverage_report
-
-      - name: Upload lcov report
-        uses: actions/upload-artifact@v4
-        with:
-          name: cifuzz-coverage-lcov
-          path: lcov.info
-
-      - name: Upload Findings report
-        uses: actions/upload-artifact@v4
-        with:
-          name: cifuzz-findings
-          path: findings.txt
