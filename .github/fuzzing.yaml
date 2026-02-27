@@ -1,0 +1,95 @@
+name: Fuzzing with CI Fuzz
+
+# Runs all fuzz tests in this repository with CI Fuzz.
+
+# You need to set CIFUZZ_DOWNLOAD_TOKEN as a repository secret. Get the token
+# from https://downloads.code-intelligence.com/.
+
+# Run workflow each time code is pushed to default branch of the repository,
+# for every pull request to the default branch and on a schedule. Allow to
+# run this workflow manually.
+# The scheduled workflow runs every day at 03:50 UTC.
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+  schedule:
+    - cron: '50 03 * * *'
+  workflow_dispatch:
+
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Please comment-out the ones you don't need and uncomment the ones you do need
+
+      # Required to upload Findings to GitHub code scanning
+      security-events: write
+
+      # Required to commit Findings to repository
+      # contents: write
+
+    steps:
+      # Adapt this if you are not running on a container with Debian-based distribution
+      #- name: Install dependecies
+      #  run: |
+      #    sudo apt update
+      #    sudo apt install cmake clang llvm lcov rclone
+
+      - name: Checkout repository
+        uses: "actions/checkout@v4"
+
+      - name: Install CI Fuzz
+        uses: "CodeIntelligenceTesting/actions/install-cifuzz@v1"
+        with:
+          version: latest
+          download-token: ${{ secrets.CIFUZZ_DOWNLOAD_TOKEN }}
+
+
+      # Needs configuration of rclone
+      # - name: Copy corpus from cloud storage
+      #   run: |
+      #     mkdir -p .cifuzz-corpus
+      #     rclone copy -v cloud-storage:corpora/PROJECT_NAME .cifuzz-corpus
+
+      - name: Run fuzzing
+        uses: "CodeIntelligenceTesting/actions/run-fuzzing@v1"
+        with:
+          duration: 15s
+
+      # Needs configuration of rclone
+      # - name: Copy corpus to cloud storage
+      #   run: |
+      #     rclone copy -v .cifuzz-corpus cloud-storage:corpora/PROJECT_NAME
+
+      - name: Upload code-scanning report
+        uses: "CodeIntelligenceTesting/actions/upload-code-scanning-report@v1"
+
+      # Uncomment this step if you want to commit all Findings found when running this workflow:
+      # - name: Commit Findings to repository
+      #   run: |
+      #     git config --global user.name 'GitHub Action'
+      #     git config --global user.email 'zgtm@users.noreply.github.com'
+      #     git add .cifuzz-findings
+      #     git commit -m "Automated commit of CI Fuzz Findings"
+      #     git push
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cifuzz-coverage
+          path: coverage_report
+
+      - name: Upload lcov report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cifuzz-coverage-lcov
+          path: lcov.info
+
+      - name: Upload Findings report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cifuzz-findings
+          path: findings.txt
