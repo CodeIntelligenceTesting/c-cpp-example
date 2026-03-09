@@ -62,6 +62,10 @@ jobs:
       # - name: Copy corpus to cloud storage
       #   run: |
       #     rclone copy -v .cifuzz-corpus cloud-storage:corpora/PROJECT_NAME
+      - name: Debug - list cifuzz directories
+        if: always()
+        run: ls -la .cifuzz-* || echo "No .cifuzz-* directories found"
+        shell: bash
 
       - name: Upload code-scanning report
         if: always()
