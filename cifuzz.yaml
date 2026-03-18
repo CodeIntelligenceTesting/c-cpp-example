@@ -8,7 +8,7 @@ build-system: cmake
 
 ## Engine used for fuzzing, default is "libfuzzer-clang".
 ## Valid values: "libfuzzer-clang", "honggfuzz-clang", "honggfuzz-gcc"
-engine: libfuzzer-clang
+engine: honggfuzz-gcc
 
 ## Sanitizers to use when building fuzz tests. If not set, ASan and UBSan
 ## are used by default.
